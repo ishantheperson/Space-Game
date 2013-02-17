@@ -14,6 +14,8 @@ namespace SpaceGame {
         private int turnRate = 1;
         float rotation;
 
+        private const float radianConversian = (float)(Math.PI / 180);
+
         public Player() {
             texture = new Texture(@"res/image/player.png");
             sprite = new Sprite(texture);
@@ -25,12 +27,11 @@ namespace SpaceGame {
         }
 
         public void Update(RenderWindow window) {
-            if (Mouse.IsButtonPressed(Mouse.Button.Right)) {
+            if (Mouse.IsButtonPressed(Mouse.Button.Left)) {
                 moveLocation = Mouse.GetPosition(window);
 
                 // calculate angle from here to there
                 float angle = AngleBetweenVectors(sprite.Position, moveLocation);
-                Console.WriteLine(angle + " " + sprite.Rotation);
                 Vector2i direction = new Vector2i((int)(moveLocation.X - sprite.Position.X), (int)(moveLocation.Y - sprite.Position.Y));
                 rotation = (float)((float)(180 / Math.PI) * Math.Atan2(direction.Y, direction.X));
 
@@ -47,11 +48,12 @@ namespace SpaceGame {
                 else if (rotation < sprite.Rotation) {
                     sprite.Rotation -= 1;
                 }
-                else if (rotation == sprite.Rotation) {
+                else if (rotation == sprite.Rotation && sprite.Position.Equals(new Vector2f(moveLocation.X, moveLocation.Y))) {
                     moving = false;
                 }
-                Vector2f forward = new Vector2f((moveLocation.X - sprite.Position.X), moveLocation.Y - sprite.Position.Y);
-
+                Vector2f forward = new Vector2f((float)Math.Cos(sprite.Rotation * radianConversian), (float) Math.Sin(sprite.Rotation * radianConversian));
+                forward *= 2;
+                sprite.Position += forward;
             }
         }
 

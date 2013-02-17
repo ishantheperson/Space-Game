@@ -13,6 +13,7 @@ namespace SpaceGame {
         public const string WindowTitle = "The Amazing C# Space Game";
 
         private static Starfield starfield = new Starfield(400, Color.White, 1);
+        private static Player player = new Player();
 
         public static void Start() {
             Console.WriteLine("INFO: Game starting...");
@@ -29,6 +30,7 @@ namespace SpaceGame {
                 gameWindow.Clear();
 
                 starfield.Draw(ref gameWindow);
+                player.Draw(ref gameWindow);
 
                 gameWindow.Display();
             }

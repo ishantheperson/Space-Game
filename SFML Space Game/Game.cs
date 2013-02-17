@@ -24,10 +24,15 @@ namespace SpaceGame {
         public static void Loop() {
             gameWindow = new RenderWindow(new VideoMode(WindowWidth, WindowHeight), WindowTitle);
             gameWindow.Closed += (sender, args) => gameWindow.Close();
+            gameWindow.SetFramerateLimit(60);
+
+            
 
             while (gameWindow.IsOpen()) {
                 gameWindow.DispatchEvents();
                 gameWindow.Clear();
+
+                player.Update(gameWindow);
 
                 starfield.Draw(ref gameWindow);
                 player.Draw(ref gameWindow);

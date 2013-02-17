@@ -11,6 +11,7 @@ namespace SpaceGame {
 
         private Vector2i moveLocation;
         private bool moving;
+        private int turnRate = 1;
         float rotation;
 
         public Player() {
@@ -33,22 +34,10 @@ namespace SpaceGame {
                 Vector2i direction = new Vector2i((int)(moveLocation.X - sprite.Position.X), (int)(moveLocation.Y - sprite.Position.Y));
                 rotation = (float)((float)(180 / Math.PI) * Math.Atan2(direction.Y, direction.X));
 
-                if (rotation > sprite.Rotation) {
-                    sprite.Rotation += 1;
-                    moving = true;
-                }
-                else if (rotation < sprite.Rotation) {
-                    sprite.Rotation -= 1;
-                    moving = true;
-                }
-                else if (rotation == sprite.Rotation) {
-                    moving = false;
-                }
-
-                Vector2f forward = new Vector2f( (moveLocation.X - sprite.Position.X), moveLocation.Y - sprite.Position.Y);
+                moving = true;
             }
 
-            else if (moving) {
+            if (moving) {
                 if ((int)(sprite.Rotation - rotation) == 0) {
                     moving = false;
                 }
@@ -61,6 +50,8 @@ namespace SpaceGame {
                 else if (rotation == sprite.Rotation) {
                     moving = false;
                 }
+                Vector2f forward = new Vector2f((moveLocation.X - sprite.Position.X), moveLocation.Y - sprite.Position.Y);
+
             }
         }
 

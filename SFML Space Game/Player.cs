@@ -44,16 +44,15 @@ namespace SpaceGame {
                 else if (rotation == sprite.Rotation) {
                     moving = false;
                 }
-<<<<<<< HEAD
 
                 Vector2f forward = new Vector2f( (moveLocation.X - sprite.Position.X), moveLocation.Y - sprite.Position.Y);
-                
-=======
->>>>>>> 4d74119e01b0592210f51672357a293b422d35c7
             }
 
             else if (moving) {
-                if (rotation > sprite.Rotation) {
+                if ((int)(sprite.Rotation - rotation) == 0) {
+                    moving = false;
+                }
+                else if (rotation > sprite.Rotation) {
                     sprite.Rotation += 1;
                 }
                 else if (rotation < sprite.Rotation) {

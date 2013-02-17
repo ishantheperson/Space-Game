@@ -55,7 +55,8 @@ namespace SpaceGame {
             }
 
             if (move) {
-                if (Vector2i.Equals(moveLocation, new Vector2i((int)sprite.Position.X, (int)sprite.Position.Y))) {
+                if (Near(sprite.Position, moveLocation)) {
+
                     move = false;
                 }
                 else {
@@ -76,16 +77,10 @@ namespace SpaceGame {
             return (float)((180 / Math.PI) * Math.Atan2(b.Y - a.Y, b.X - a.X));
         }
 
-        /// <summary>
-        /// Checks if <i>A</i> is within <i>Precision</i> of <i>B</i>
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="precision"></param>
-        /// <returns></returns>
-        private bool Near(float a, float b, int precision) {
-            if (b - precision >= a || b + precision <= a) return true;
-            else return false;
+        private bool Near(Vector2f a, Vector2i b) {
+            if (!(a.X - 2 < b.X && a.X + 2 > b.X)) return false;
+            if (!(a.Y - 2 < b.Y && a.Y + 2 > b.Y)) return false;
+            return true;
         }
 
         public Vector2f Normalize(Vector2f vector) {

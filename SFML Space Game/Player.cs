@@ -10,7 +10,9 @@ namespace SpaceGame {
         private Sprite sprite;
 
         private Vector2i moveLocation;
-        private bool moving;
+        private bool rotate;
+        private bool move;
+
         private int turnRate = 1;
         float rotation;
 
@@ -27,7 +29,7 @@ namespace SpaceGame {
         }
 
         public void Update(RenderWindow window) {
-            if (Mouse.IsButtonPressed(Mouse.Button.Left)) {
+            if (Mouse.IsButtonPressed(Mouse.Button.Left) && Game.Focused) {
                 moveLocation = Mouse.GetPosition(window);
 
                 // calculate angle from here to there
@@ -35,12 +37,13 @@ namespace SpaceGame {
                 Vector2i direction = new Vector2i((int)(moveLocation.X - sprite.Position.X), (int)(moveLocation.Y - sprite.Position.Y));
                 rotation = (float)((float)(180 / Math.PI) * Math.Atan2(direction.Y, direction.X));
 
-                moving = true;
+                rotate = true;
+                move = true;
             }
 
-            if (moving) {
-                if ((int)(sprite.Rotation - rotation) == 0 && sprite.Position.Equals(new Vector2f(moveLocation.X, moveLocation.Y))) {
-                    moving = false;
+            if (rotate) {
+                if ((int)(sprite.Rotation - rotation) == 0) {
+                    rotate = false;
                 }
                 else if (rotation > sprite.Rotation) {
                     sprite.Rotation += 1;
@@ -49,9 +52,19 @@ namespace SpaceGame {
                     sprite.Rotation -= 1;
                 }
 
-                Vector2f forward = new Vector2f((float)Math.Cos(sprite.Rotation * radianConversian), (float) Math.Sin(sprite.Rotation * radianConversian));
-                forward *= 2;
-                sprite.Position += forward;
+            }
+
+            if (move) {
+                if (Vector2i.Equals(moveLocation, new Vector2i((int)sprite.Position.X, (int)sprite.Position.Y))) {
+                    move = false;
+                }
+                else {
+                    Console.WriteLine("X {0} Y {1} move x {2} y {3}", sprite.Position.X, sprite.Position.Y, moveLocation.X, moveLocation.Y);
+                    Vector2f forward = Normalize(new Vector2f(moveLocation.X - sprite.Position.X, moveLocation.Y - sprite.Position.Y));
+
+                    forward *= 2;
+                    sprite.Position += forward;
+                }
             }
         }
 
@@ -59,8 +72,25 @@ namespace SpaceGame {
             window.Draw(sprite);
         }
 
-        float AngleBetweenVectors(Vector2f a, Vector2i b) {
+        private float AngleBetweenVectors(Vector2f a, Vector2i b) {
             return (float)((180 / Math.PI) * Math.Atan2(b.Y - a.Y, b.X - a.X));
+        }
+
+        /// <summary>
+        /// Checks if <i>A</i> is within <i>Precision</i> of <i>B</i>
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="precision"></param>
+        /// <returns></returns>
+        private bool Near(float a, float b, int precision) {
+            if (b - precision >= a || b + precision <= a) return true;
+            else return false;
+        }
+
+        public Vector2f Normalize(Vector2f vector) {
+            float distance = (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y); // x^2 + y^2 == length (pythagorean theorum)
+            return new Vector2f(vector.X / distance, vector.Y / distance);
         }
     }
 }

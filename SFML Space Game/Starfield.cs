@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 using SFML.Graphics;
 using SFML.Window;
 
 namespace SpaceGame {
     public class Starfield {
-        private List<Tuple<int, int, int> stars = new List<Vector2i>();
+        private List<Tuple<int, int, int>> stars = new List<Tuple<int, int, int>>();
         private int offsetX = 0, offsetY = 0;
         private Texture texture1, texture2, texture3;
+
+        private int count;
 
         public Starfield(int count, Color color) {
             texture1 = new Texture(new Image(1, 1, color));
@@ -18,14 +21,28 @@ namespace SpaceGame {
             Random random = new Random();
 
             for (int i = 0; i < count; i++) {
-                stars.Add(Tuple.Create(random.Next(Game.WindowWidth), random.Next(Game.WindowHeight), random.Next(0, 4)));
+                stars.Add(Tuple.Create(random.Next(Game.WindowWidth), random.Next(Game.WindowHeight), random.Next(0, 3)));
             }
         }
 
         public void Draw(ref RenderWindow window) {
-            foreach (Tuple<int, int. int> position in stars) {
-                Sprite sprite = new Sprite(texture);
-                sprite.Position = new Vector2f(position.X + offsetX, position.Y + offsetY);
+            foreach (Tuple<int, int, int> tuple in stars) {
+                Sprite sprite = new Sprite();
+                
+                switch (tuple.Item3) {
+                    case 0:
+                        sprite = new Sprite(texture1);
+                        break;
+
+                    case 1:
+                        sprite = new Sprite(texture2);
+                        break;
+
+                    case 2:
+                        sprite = new Sprite(texture3);
+                        break;
+                }
+                sprite.Position = new Vector2f(tuple.Item1 + offsetX, tuple.Item2 + offsetY);
 
                 window.Draw(sprite);
             }

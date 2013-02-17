@@ -39,7 +39,7 @@ namespace SpaceGame {
             }
 
             if (moving) {
-                if ((int)(sprite.Rotation - rotation) == 0) {
+                if ((int)(sprite.Rotation - rotation) == 0 && sprite.Position.Equals(new Vector2f(moveLocation.X, moveLocation.Y))) {
                     moving = false;
                 }
                 else if (rotation > sprite.Rotation) {
@@ -48,9 +48,7 @@ namespace SpaceGame {
                 else if (rotation < sprite.Rotation) {
                     sprite.Rotation -= 1;
                 }
-                else if (rotation == sprite.Rotation && sprite.Position.Equals(new Vector2f(moveLocation.X, moveLocation.Y))) {
-                    moving = false;
-                }
+
                 Vector2f forward = new Vector2f((float)Math.Cos(sprite.Rotation * radianConversian), (float) Math.Sin(sprite.Rotation * radianConversian));
                 forward *= 2;
                 sprite.Position += forward;

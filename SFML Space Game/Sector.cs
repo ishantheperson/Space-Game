@@ -8,5 +8,8 @@ using SFML.Graphics;
 namespace SpaceGame {
     public class Sector {
         private IntRect top, right, left, bottom;
+        public View sectorView;
+
+        private Starfield starfield;
     }
 }

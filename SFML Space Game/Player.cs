@@ -10,6 +10,8 @@ namespace SpaceGame {
         private Sprite sprite;
 
         private Vector2i moveLocation;
+        private bool moving;
+        float rotation;
 
         public Player() {
             texture = new Texture(@"res/image/player.png");
@@ -24,17 +26,40 @@ namespace SpaceGame {
         public void Update(RenderWindow window) {
             if (Mouse.IsButtonPressed(Mouse.Button.Right)) {
                 moveLocation = Mouse.GetPosition(window);
-            }
-            else {
-                moveLocation = new Vector2i((int) sprite.Position.X, (int) sprite.Position.Y);
+
+                // calculate angle from here to there
+                float angle = AngleBetweenVectors(sprite.Position, moveLocation);
+                Console.WriteLine(angle + " " + sprite.Rotation);
+                Vector2i direction = new Vector2i((int)(moveLocation.X - sprite.Position.X), (int)(moveLocation.Y - sprite.Position.Y));
+                rotation = (float)((float)(180 / Math.PI) * Math.Atan2(direction.Y, direction.X));
+
+                if (rotation > sprite.Rotation) {
+                    sprite.Rotation += 1;
+                    moving = true;
+                }
+                else if (rotation < sprite.Rotation) {
+                    sprite.Rotation -= 1;
+                    moving = true;
+                }
+                else if (rotation == sprite.Rotation) {
+                    moving = false;
+                }
+
+                Vector2f forward = new Vector2f( (moveLocation.X - sprite.Position.X), moveLocation.Y - sprite.Position.Y);
+                
             }
 
-            // calculate angle from here to there
-            float angle = AngleBetweenVectors(sprite.Position, moveLocation);
-            Console.WriteLine(angle + " " + sprite.Rotation);
-            Vector2i direction = new Vector2i((int) (moveLocation.X - sprite.Position.X), (int)(moveLocation.Y - sprite.Position.Y));
-            float rotation = (float)((float)(180 / Math.PI) * Math.Atan2(direction.Y, direction.X));
-            sprite.Rotation = rotation;
+            else if (moving) {
+                if (rotation > sprite.Rotation) {
+                    sprite.Rotation += 1;
+                }
+                else if (rotation < sprite.Rotation) {
+                    sprite.Rotation -= 1;
+                }
+                else if (rotation == sprite.Rotation) {
+                    moving = false;
+                }
+            }
         }
 
         public void Draw(ref RenderWindow window) {

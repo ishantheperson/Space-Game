@@ -12,7 +12,7 @@ namespace SpaceGame {
         public const int WindowHeight = 600;
         public const string WindowTitle = "The Amazing C# Space Game";
 
-        public static bool Focused = true;
+        public static bool Focused { get; set; }
 
         private static Starfield starfield = new Starfield(400, Color.White, 1);
         private static Player player = new Player();
@@ -28,6 +28,7 @@ namespace SpaceGame {
             gameWindow.Closed += (sender, args) => gameWindow.Close();
             gameWindow.SetFramerateLimit(60);
 
+            Focused = true;
             gameWindow.GainedFocus += (sender, args) => Focused = true;
             gameWindow.LostFocus += (sender, args) => Focused = false;
 
@@ -35,8 +36,12 @@ namespace SpaceGame {
                 gameWindow.DispatchEvents();
                 gameWindow.Clear();
 
-                player.Update(gameWindow);
+                // draw (only if focused)
+                if (Focused) {
+                    player.Update(gameWindow);
+                }
 
+                // update
                 starfield.Draw(ref gameWindow);
                 player.Draw(ref gameWindow);
 

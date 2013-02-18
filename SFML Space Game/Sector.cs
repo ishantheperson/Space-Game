@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 
 using SFML.Graphics;
-using SMFL.Window;
+using SFML.Window;
 
 namespace SpaceGame {
     public class Sector {
@@ -17,8 +17,24 @@ namespace SpaceGame {
                 while (reader.Read()) {
                     if (reader.IsStartElement()) {
                         switch (reader.Name) {
-                            case "Star":
-                                objects.Add(new Starfield(2000, Color.White, new Vector2i(5000, 5000));
+                            case "Starfield": // starfield exists
+                                int count;
+                                Color color;
+                                Vector2i size;
+
+                                while (reader.Value != "/Starfield") {
+                                    if (reader.IsStartElement()) {
+                                        switch (reader.Name) {
+                                            case "Count":
+                                                count = int.Parse(reader.Value);
+                                                break;
+
+                                            case "Color":
+
+                                        }
+                                    }
+                                }
+                                
                                 break;
                         }
                     }

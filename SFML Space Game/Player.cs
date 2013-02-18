@@ -12,7 +12,9 @@ namespace SpaceGame {
         private Vector2i moveLocation;
         private bool move;
 
-        float rotation;
+        public FloatRect Bounds { get { return sprite.GetGlobalBounds(); } }
+
+        private float rotation;
 
         private const float radianConversian = (float)(Math.PI / 180);
 

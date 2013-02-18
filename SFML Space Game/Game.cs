@@ -16,6 +16,8 @@ namespace SpaceGame {
 
         private static Sector sector;
 
+        public static View View { get { return gameWindow.GetView(); } set { gameWindow.SetView(value); } }
+
         public static void Start() {
             Console.WriteLine("INFO: Game starting...");
 

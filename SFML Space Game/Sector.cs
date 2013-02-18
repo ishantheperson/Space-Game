@@ -7,10 +7,11 @@ using SFML.Window;
 
 namespace SpaceGame {
     public class Sector {
-        private IntRect top, right, left, bottom;
-        public View sectorView;
+        private FloatRect top, right, left, bottom;
 
-        private List<DrawableGameObject> objects = new List<DrawableGameObject>();
+        private int offsetX, offsetY;
+
+        private Dictionary<string, DrawableGameObject> objects = new Dictionary<string, DrawableGameObject>();
 
         /// <summary>
         /// Creates a new sector, and adds a player
@@ -97,7 +98,7 @@ namespace SpaceGame {
                                 }
 
 
-                                objects.Add(new Starfield(count, color, size));
+                                objects.Add("starfield", new Starfield(count, color, size));
                                 break;
                         }
                     }
@@ -105,7 +106,14 @@ namespace SpaceGame {
             }
             #endregion
 
-            objects.Add(new Player());
+            #region Rectangles
+            top = new FloatRect(0, 0, Game.WindowWidth, 200);
+            right = new FloatRect(Game.WindowWidth - 200, 0, 200, Game.WindowHeight);
+            left = new FloatRect(0, 0, 200, Game.WindowHeight);
+            bottom = new FloatRect(0, Game.WindowHeight - 200, Game.WindowWidth, 200);
+            #endregion
+
+            objects.Add("player", new Player());
 
         }
 
@@ -114,8 +122,24 @@ namespace SpaceGame {
         /// </summary>
         /// <param name="window">Window to pass</param>
         public void Update(RenderWindow window) {
-            foreach (DrawableGameObject drawable in objects) {
-                drawable.Update(window);
+            if (((Player)objects["player"]).Bounds.Intersects(top) && offsetY > 0) {
+                // move up
+            }
+
+            if (((Player)objects["player"]).Bounds.Intersects(left) && offsetX > 0) {
+                // move left
+            }
+
+            if (((Player)objects["player"]).Bounds.Intersects(right)) {
+                // move right
+            }
+
+            if (((Player)objects["player"]).Bounds.Intersects(bottom)) {
+                // move down
+            }
+
+            foreach (KeyValuePair<string, DrawableGameObject> drawable in objects) {
+                drawable.Value.Update(window);
             }
         }
 
@@ -124,8 +148,8 @@ namespace SpaceGame {
         /// </summary>
         /// <param name="window">Window to draw to</param>
         public void Draw(ref RenderWindow window) {
-            foreach (DrawableGameObject drawable in objects) {
-                drawable.Draw(ref window);
+            foreach (KeyValuePair<string, DrawableGameObject> drawable in objects) {
+                drawable.Value.Draw(ref window);
             }
         }
     }

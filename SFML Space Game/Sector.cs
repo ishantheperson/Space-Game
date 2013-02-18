@@ -28,68 +28,71 @@ namespace SpaceGame {
                                 Vector2i size = new Vector2i();
 
                                 reader.Read();
-                                while (reader.Name != "Starfield" && reader.NodeType != XmlNodeType.EndElement) {
+                                while (true) {
+                                    if (reader.Name == "Starfield" && reader.NodeType == XmlNodeType.EndElement) break;
                                     reader.Read();
-                                    if (reader.IsStartElement()) {
-                                        switch (reader.Name) {
-                                            case "Count":
+
+                                    switch (reader.Name) {
+                                        case "Count":
+                                            if (count == 0) {
                                                 Console.WriteLine("INFO: Started Count element");
                                                 reader.Read();
                                                 count = int.Parse(reader.Value);
                                                 Console.WriteLine("INFO: Ended Count element");
-                                                break;
+                                            }
+                                            break;
 
-                                            case "Color":
-                                                Console.WriteLine("INFO: Started Color element");
+                                        case "Color":
+                                            Console.WriteLine("INFO: Started Color element");
+                                            reader.Read();
+                                            while (reader.Name != "Color" && reader.NodeType != XmlNodeType.EndElement) {
                                                 reader.Read();
-                                                while (reader.Name != "Color" && reader.NodeType != XmlNodeType.EndElement) {
-                                                    reader.Read();
-                                                    if (reader.IsStartElement()) {
-                                                        switch (reader.Name) {
-                                                            case "R":
-                                                                Console.WriteLine("INFO: Red component found");
-                                                                reader.Read();
-                                                                color.R = byte.Parse(reader.Value); break;
+                                                if (reader.IsStartElement()) {
+                                                    switch (reader.Name) {
+                                                        case "R":
+                                                            Console.WriteLine("INFO: Red component found");
+                                                            reader.Read();
+                                                            color.R = byte.Parse(reader.Value); break;
 
-                                                            case "G":
-                                                                Console.WriteLine("INFO: Green component found");
-                                                                reader.Read();
-                                                                color.G = byte.Parse(reader.Value); break;
+                                                        case "G":
+                                                            Console.WriteLine("INFO: Green component found");
+                                                            reader.Read();
+                                                            color.G = byte.Parse(reader.Value); break;
 
-                                                            case "B":
-                                                                Console.WriteLine("INFO: Blue component found");
-                                                                reader.Read();
-                                                                color.B = byte.Parse(reader.Value); break;
-                                                        }
+                                                        case "B":
+                                                            Console.WriteLine("INFO: Blue component found");
+                                                            reader.Read();
+                                                            color.B = byte.Parse(reader.Value); break;
                                                     }
                                                 }
-                                                Console.WriteLine("INFO: Ended Color element");
-                                                break;
+                                            }
+                                            Console.WriteLine("INFO: Ended Color element");
+                                            break;
 
-                                            case "Size":
-                                                Console.WriteLine("INFO: Size component started");
+                                        case "Size":
+                                            Console.WriteLine("INFO: Size component started");
+                                            reader.Read();
+                                            while (reader.Name != "Size" && reader.NodeType != XmlNodeType.EndElement) {
                                                 reader.Read();
-                                                while (reader.Name != "Size" && reader.NodeType != XmlNodeType.EndElement) {
-                                                    reader.Read();
-                                                    if (reader.IsStartElement()) {
-                                                        switch (reader.Name) {
-                                                            case "X":
-                                                                Console.WriteLine("INFO: X component found");
-                                                                reader.Read();
-                                                                size.X = int.Parse(reader.Value); break;
+                                                if (reader.IsStartElement()) {
+                                                    switch (reader.Name) {
+                                                        case "X":
+                                                            Console.WriteLine("INFO: X component found");
+                                                            reader.Read();
+                                                            size.X = int.Parse(reader.Value); break;
 
-                                                            case "Y":
-                                                                Console.WriteLine("INFO: Y component found");
-                                                                reader.Read();
-                                                                size.Y = int.Parse(reader.Value); break;
-                                                        }
+                                                        case "Y":
+                                                            Console.WriteLine("INFO: Y component found");
+                                                            reader.Read();
+                                                            size.Y = int.Parse(reader.Value); break;
                                                     }
                                                 }
-                                                Console.WriteLine("INFO: Size component ended");
-                                                break;
-                                        }
+                                            }
+                                            Console.WriteLine("INFO: Size component ended");
+                                            break;
                                     }
                                 }
+
 
                                 objects.Add(new Starfield(count, color, size));
 

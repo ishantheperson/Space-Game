@@ -9,7 +9,8 @@ namespace SpaceGame {
     public class Sector {
         private FloatRect top, right, left, bottom;
 
-        private int offsetX, offsetY;
+        private Vector2f offset = new Vector2f();
+        private Vector2i size = new Vector2i();
 
         private Dictionary<string, DrawableGameObject> objects = new Dictionary<string, DrawableGameObject>();
 
@@ -23,10 +24,32 @@ namespace SpaceGame {
                 while (reader.Read()) {
                     if (reader.IsStartElement()) {
                         switch (reader.Name) {
+                            case "Size":
+                                Console.WriteLine("INFO: Size component started");
+                                reader.Read();
+                                while (true) {
+                                    if (reader.Name == "Size" && reader.NodeType == XmlNodeType.EndElement) break;
+                                    reader.Read();
+                                    if (reader.IsStartElement()) {
+                                        switch (reader.Name) {
+                                            case "X":
+                                                Console.WriteLine("INFO: X component found");
+                                                reader.Read();
+                                                size.X = int.Parse(reader.Value); break;
+
+                                            case "Y":
+                                                Console.WriteLine("INFO: Y component found");
+                                                reader.Read();
+                                                size.Y = int.Parse(reader.Value); break;
+                                        }
+                                    }
+                                }
+                                Console.WriteLine("INFO: Size component ended");
+                                break;
+
                             case "Starfield": // starfield exists
                                 int count = 0;
                                 Color color = new Color();
-                                Vector2i size = new Vector2i();
 
                                 reader.Read();
                                 while (true) {
@@ -71,29 +94,6 @@ namespace SpaceGame {
                                             }
                                             Console.WriteLine("INFO: Ended Color element");
                                             break;
-
-                                        case "Size":
-                                            Console.WriteLine("INFO: Size component started");
-                                            reader.Read();
-                                            while (true) {
-                                                if (reader.Name == "Size" && reader.NodeType == XmlNodeType.EndElement) break;
-                                                reader.Read();
-                                                if (reader.IsStartElement()) {
-                                                    switch (reader.Name) {
-                                                        case "X":
-                                                            Console.WriteLine("INFO: X component found");
-                                                            reader.Read();
-                                                            size.X = int.Parse(reader.Value); break;
-
-                                                        case "Y":
-                                                            Console.WriteLine("INFO: Y component found");
-                                                            reader.Read();
-                                                            size.Y = int.Parse(reader.Value); break;
-                                                    }
-                                                }
-                                            }
-                                            Console.WriteLine("INFO: Size component ended");
-                                            break;
                                     }
                                 }
 
@@ -122,20 +122,23 @@ namespace SpaceGame {
         /// </summary>
         /// <param name="window">Window to pass</param>
         public void Update(RenderWindow window) {
-            if (((Player)objects["player"]).Bounds.Intersects(top) && offsetY > 0) {
+            if (((Player)objects["player"]).Bounds.Intersects(top) && offset.Y > 0) {
                 // move up
             }
 
-            if (((Player)objects["player"]).Bounds.Intersects(left) && offsetX > 0) {
+            if (((Player)objects["player"]).Bounds.Intersects(left) && offset.X > 0) {
                 // move left
             }
 
-            if (((Player)objects["player"]).Bounds.Intersects(right)) {
-                // move right
+            if (((Player)objects["player"]).Bounds.Intersects(right) && offset.X - (Game.View.Center.X - 300) < size.X) {
+                offset.X += 5;
+                Game.View.Move(offset);
+                Console.WriteLine("right hit");
             }
 
-            if (((Player)objects["player"]).Bounds.Intersects(bottom)) {
-                // move down
+            if (((Player)objects["player"]).sprite.GetGlobalBounds().Intersects(bottom) && offset.Y < size.Y) {
+                Game.View.Move(new Vector2f(0, 4));
+
             }
 
             foreach (KeyValuePair<string, DrawableGameObject> drawable in objects) {

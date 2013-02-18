@@ -7,7 +7,7 @@ using SFML.Window;
 namespace SpaceGame {
     public class Player : DrawableGameObject {
         private Texture texture;
-        private Sprite sprite;
+        public Sprite sprite;
 
         private Vector2i moveLocation;
         private bool move;

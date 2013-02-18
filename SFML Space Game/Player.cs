@@ -24,6 +24,8 @@ namespace SpaceGame {
 
             sprite.Position = new Vector2f(200, Game.WindowHeight / 2);
             sprite.Scale = new Vector2f(0.3f, 0.3f);
+
+            sprite.Texture.Smooth = true;  
         }
 
         public void Update(RenderWindow window) {
@@ -79,5 +81,6 @@ namespace SpaceGame {
             float distance = (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y); // x^2 + y^2 == length (pythagorean theorum)
             return new Vector2f(vector.X / distance, vector.Y / distance);
         }
+
     }
 }

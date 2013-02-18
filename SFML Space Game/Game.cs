@@ -14,8 +14,7 @@ namespace SpaceGame {
 
         public static bool Focused { get; set; }
 
-        private static Starfield starfield = new Starfield(2000, Color.White, new Vector2i(5000, 5000));
-        private static Player player = new Player();
+        private static Sector sector;
 
         public static void Start() {
             Console.WriteLine("INFO: Game starting...");
@@ -32,18 +31,19 @@ namespace SpaceGame {
             gameWindow.GainedFocus += (sender, args) => Focused = true;
             gameWindow.LostFocus += (sender, args) => Focused = false;
 
+            sector = new Sector("test.xml");
+
             while (gameWindow.IsOpen()) {
                 gameWindow.DispatchEvents();
                 gameWindow.Clear();
 
-                // draw (only if focused)
+                // update (only if focused)
                 if (Focused) {
-                    player.Update(gameWindow);
+                    sector.Update(gameWindow);
                 }
 
-                // update
-                starfield.Draw(ref gameWindow);
-                player.Draw(ref gameWindow);
+                // draw
+                sector.Draw(ref gameWindow);
 
                 gameWindow.Display();
             }

@@ -28,7 +28,7 @@ namespace SpaceGame {
             sprite.Texture.Smooth = true;  
         }
 
-        public void Update(RenderWindow window) {
+        public override void Update(RenderWindow window) {
             if (Mouse.IsButtonPressed(Mouse.Button.Left) && Game.Focused) {
                 moveLocation = Mouse.GetPosition(window);
 

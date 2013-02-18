@@ -84,7 +84,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="res\level\test.xml" />
+    <None Include="res\level\test.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="res\image\player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -8,7 +8,7 @@ using SFML.Window;
 namespace SpaceGame {
     public class Starfield : DrawableGameObject {
         private List<Tuple<int, int, int>> stars = new List<Tuple<int, int, int>>();
-        public int offsetX = 0, offsetY = 0;
+        public Vector2i offset;
         private Texture texture1, texture2, texture3;
 
         private int count;
@@ -53,7 +53,7 @@ namespace SpaceGame {
                         sprite = new Sprite(texture3);
                         break;
                 }
-                sprite.Position = new Vector2f(tuple.Item1 + offsetX, tuple.Item2 + offsetY);
+                sprite.Position = new Vector2f(tuple.Item1 + offset.X, tuple.Item2 + offset.Y);
 
                 window.Draw(sprite);
             }

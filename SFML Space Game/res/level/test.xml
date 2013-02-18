@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <Sector>
+  <Size>
+    <X>5000</X>
+    <Y>5000</Y>
+  </Size>
+
   <Starfield>
     <Count>5000</Count>
     <Color>
@@ -8,10 +13,5 @@
       <G>255</G>
       <B>255</B>
     </Color>
-
-    <Size>
-      <X>5000</X>
-      <Y>5000</Y>
-    </Size>
   </Starfield>
 </Sector>

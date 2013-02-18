@@ -17,7 +17,7 @@ namespace SpaceGame {
         /// </summary>
         /// <param name="name">Level name, located in res/level/</param>
         public Sector(string name) {
-            objects.Add(new Player());
+            #region Parse level file
             using (XmlReader reader = XmlReader.Create(@"res/level/" + name)) {
                 while (reader.Read()) {
                     if (reader.IsStartElement()) {
@@ -45,7 +45,9 @@ namespace SpaceGame {
                                         case "Color":
                                             Console.WriteLine("INFO: Started Color element");
                                             reader.Read();
-                                            while (reader.Name != "Color" && reader.NodeType != XmlNodeType.EndElement) {
+                                            while (true) {
+                                                color.A = 255;
+                                                if (reader.Name == "Color" && reader.NodeType == XmlNodeType.EndElement) break;
                                                 reader.Read();
                                                 if (reader.IsStartElement()) {
                                                     switch (reader.Name) {
@@ -72,7 +74,8 @@ namespace SpaceGame {
                                         case "Size":
                                             Console.WriteLine("INFO: Size component started");
                                             reader.Read();
-                                            while (reader.Name != "Size" && reader.NodeType != XmlNodeType.EndElement) {
+                                            while (true) {
+                                                if (reader.Name == "Size" && reader.NodeType == XmlNodeType.EndElement) break;
                                                 reader.Read();
                                                 if (reader.IsStartElement()) {
                                                     switch (reader.Name) {
@@ -95,12 +98,15 @@ namespace SpaceGame {
 
 
                                 objects.Add(new Starfield(count, color, size));
-
                                 break;
                         }
                     }
                 }
             }
+            #endregion
+
+            objects.Add(new Player());
+
         }
 
         /// <summary>

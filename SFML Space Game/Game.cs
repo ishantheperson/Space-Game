@@ -14,7 +14,7 @@ namespace SpaceGame {
 
         public static bool Focused { get; set; }
 
-        private static Starfield starfield = new Starfield(2000, Color.White, 1, new Vector2i(5000, 5000));
+        private static Starfield starfield = new Starfield(2000, Color.White, new Vector2i(5000, 5000));
         private static Player player = new Player();
 
         public static void Start() {

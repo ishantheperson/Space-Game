@@ -2,6 +2,16 @@
 
 <Sector>
   <Starfield>
-    
+    <Count>2000</Count>
+    <Color>
+      <R>255</R>
+      <G>255</G>
+      <B>255</B>
+    </Color>
+
+    <Size>
+      <X>5000</X>
+      <Y>5000</Y>
+    </Size>
   </Starfield>
 </Sector>

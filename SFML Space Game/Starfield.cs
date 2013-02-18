@@ -19,9 +19,8 @@ namespace SpaceGame {
         /// </summary>
         /// <param name="count">Amount of stars</param>
         /// <param name="color">Star color</param>
-        /// <param name="refreshRate">Time between refreshes (in seconds)</param>
         /// <param name="size">The size of the starfield</param>
-        public Starfield(int count, Color color, float refreshRate, Vector2i size) {
+        public Starfield(int count, Color color, Vector2i size) {
             texture1 = new Texture(new Image(1, 1, color));
             texture2 = new Texture(new Image(2, 2, color));
             texture3 = new Texture(new Image(3, 3, color));

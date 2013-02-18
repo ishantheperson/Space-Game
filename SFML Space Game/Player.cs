@@ -38,7 +38,7 @@ namespace SpaceGame {
             }
 
             if (move) {
-                if (Near(sprite.Position, moveLocation, 5)) {
+                if (Near(sprite.Position, moveLocation, 20)) {
                     move = false;
                 }
                 else {

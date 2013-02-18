@@ -20,7 +20,8 @@ namespace SpaceGame {
         /// <param name="count">Amount of stars</param>
         /// <param name="color">Star color</param>
         /// <param name="refreshRate">Time between refreshes (in seconds)</param>
-        public Starfield(int count, Color color, float refreshRate) {
+        /// <param name="size">The size of the starfield</param>
+        public Starfield(int count, Color color, float refreshRate, Vector2i size) {
             texture1 = new Texture(new Image(1, 1, color));
             texture2 = new Texture(new Image(2, 2, color));
             texture3 = new Texture(new Image(3, 3, color));
@@ -31,7 +32,7 @@ namespace SpaceGame {
             this.color = color;
 
             for (int i = 0; i < count; i++) {
-                stars.Add(Tuple.Create(random.Next(Game.WindowWidth), random.Next(Game.WindowHeight), random.Next(0, 3)));
+                stars.Add(Tuple.Create(random.Next(size.X), random.Next(size.Y), random.Next(0, 3)));
             }
         }
 

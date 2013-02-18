@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <Sector>
-  <Star>2000</Star>
-  
+  <Starfield>
+    
+  </Starfield>
 </Sector>

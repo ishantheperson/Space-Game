@@ -5,7 +5,7 @@ using SFML.Graphics;
 using SFML.Window;
 
 namespace SpaceGame {
-    public class Player {
+    public class Player : DrawableGameObject {
         private Texture texture;
         private Sprite sprite;
 
@@ -63,7 +63,7 @@ namespace SpaceGame {
             }
         }
 
-        public void Draw(ref RenderWindow window) {
+        public override void Draw(ref RenderWindow window) {
             window.Draw(sprite);
         }
 

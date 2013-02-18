@@ -6,7 +6,7 @@ using SFML.Graphics;
 using SFML.Window;
 
 namespace SpaceGame {
-    public class Starfield {
+    public class Starfield : DrawableGameObject {
         private List<Tuple<int, int, int>> stars = new List<Tuple<int, int, int>>();
         private int offsetX = 0, offsetY = 0;
         private Texture texture1, texture2, texture3;
@@ -37,7 +37,7 @@ namespace SpaceGame {
         }
 
 
-        public void Draw(ref RenderWindow window) {
+        public override void Draw(ref RenderWindow window) {
             foreach (Tuple<int, int, int> tuple in stars) {
                 Sprite sprite = new Sprite();
 

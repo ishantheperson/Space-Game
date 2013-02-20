@@ -19,7 +19,7 @@ namespace SpaceGame {
         private const float radianConversian = (float)(Math.PI / 180);
 
         public Player() {
-            texture = new Texture(@"res\image\PlayerShipNoEngines.png");
+            texture = new Texture(@"res\image\player.png");
             sprite = new Sprite(texture);
 
             sprite.Origin = new Vector2f(sprite.Texture.Size.X / 2, sprite.Texture.Size.Y / 2);

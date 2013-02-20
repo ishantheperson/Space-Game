@@ -36,7 +36,7 @@ namespace SpaceGame {
                 flip = true;
             }
 
-            if (opacity == 0) FadeCompletedEventHandler(this, EventArgs.Empty);
+            if (opacity == 0) Completed(this, EventArgs.Empty);
             sprite.Color = new Color(0, 0, 0, opacity--);
         } 
 

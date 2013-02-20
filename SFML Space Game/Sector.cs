@@ -131,8 +131,6 @@ namespace SpaceGame {
             }
 
             if (((Player)objects["player"]).Bounds.Intersects(right) && offset.X - (Game.View.Center.X - 300) < size.X) {
-                offset.X += 5;
-                Game.View.Move(offset);
                 Console.WriteLine("right hit");
             }
 

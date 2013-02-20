@@ -20,10 +20,10 @@ namespace SpaceGame {
 
         public static void Start() {
             Console.WriteLine("INFO: Game starting...");
-
+            
             Loop();
         }
-
+        
         public static void Loop() {
             gameWindow = new RenderWindow(new VideoMode(WindowWidth, WindowHeight), WindowTitle);
             gameWindow.Closed += (sender, args) => gameWindow.Close();

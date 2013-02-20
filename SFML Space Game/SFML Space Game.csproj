@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawableGameObject.cs" />
+    <Compile Include="Fadable.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
@@ -85,7 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="res\image\ViperNoEngines.pdn" />
     <None Include="res\music\explore.ogg" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +109,7 @@
     <Content Include="res\image\BattleCruiserNoEngines.png" />
     <Content Include="res\image\player.png" />
     <Content Include="res\image\SplashImage.png" />
+    <Content Include="res\image\ViperNoEngines.png" />
     <Content Include="res\level\test.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

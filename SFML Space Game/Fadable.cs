@@ -5,7 +5,7 @@ using SFML.Window;
 
 namespace SpaceGame {
     public class Fadable : DrawableGameObject {
-        private int opacity;
+        private int opacity = 0;
         private Sprite sprite;
         private Texture texture;
 
@@ -20,10 +20,15 @@ namespace SpaceGame {
 
             sprite = new Sprite(texture);
             sprite.Position = position;
+            sprite.Color = new Color(0, 0, 0, 0);
         }
 
+        public override void Update(RenderWindow window) {
+            sprite.Color = new Color(0, 0, 0, opacity++);
+        } 
+
         public override void Draw(ref RenderWindow window) {
-            
+            window.Draw(sprite);
         }
     }
 }

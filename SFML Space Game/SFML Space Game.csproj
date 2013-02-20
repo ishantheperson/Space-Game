@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="res\image\ViperNoEngines.pdn" />
     <None Include="res\music\explore.ogg" />
   </ItemGroup>
   <ItemGroup>
@@ -105,10 +106,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="res\image\BattleCruiserNoEngines.png" />
     <Content Include="res\image\player.png" />
-    <Content Include="res\image\PlayerShipNoEngines.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="res\image\SplashImage.png" />
     <Content Include="res\level\test.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

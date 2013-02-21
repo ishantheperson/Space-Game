@@ -11,9 +11,10 @@ namespace SpaceGame
 {
     public class Ship
     {
+        public string ShipType;
         public int MaxHealth;
         public int Velocity;
-        public int MaxSheild;
+        public int MaxShield;
         public int SheildRegen;
         public void Read(string location)
         {
@@ -25,8 +26,33 @@ namespace SpaceGame
                     {
                         switch (reader.Name)
                         {
-                            case "Health":
-                                
+                            case "Statistics":
+                                {
+                                    reader.Read();
+                                    while (true)
+                                    {
+                                        if (reader.Name == "Statistics" && reader.NodeType == XmlNodeType.EndElement) break;
+                                        reader.Read();
+                                        if (reader.IsStartElement())
+                                        {
+                                            switch (reader.Name)
+                                            {
+                                                case "Type":
+                                                    this.ShipType = reader.Value; break;
+                                                case "Health":
+                                                    this.MaxHealth = int.Parse(reader.Value); break;
+                                                case "Velocity":
+                                                    this.Velocity = int.Parse(reader.Value); break;
+                                                case "Shield":
+                                                    this.MaxShield = int.Parse(reader.Value); break;
+                                                case "SheildRegen":
+                                                    this.SheildRegen = int.Parse(reader.Value); break;
+                                            }
+
+                                        }
+                                    }
+                                    break;
+                                }
 
                         }
                     }

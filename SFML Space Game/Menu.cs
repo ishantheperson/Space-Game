@@ -10,15 +10,14 @@ namespace SpaceGame {
 
         private static Font font = new Font("res/font.otf");
 
+        #region Menu Button Class
         class MenuButton : DrawableGameObject{
             private Text text;
-
 
             private RectangleShape shape;
 
             public event MenuButtonClickedHandler Clicked;
 
-            #region Menu Button Class
             public MenuButton(string text, float position) {
                 this.text = new Text(text, font, 48);
 
@@ -36,7 +35,8 @@ namespace SpaceGame {
             #endregion
 
             public override void Update(RenderWindow window) {
-                
+                FloatRect rect = shape.GetGlobalBounds();
+                int x1, x2, y1, y2;
             }
 
             public override void Draw(ref RenderWindow window) {

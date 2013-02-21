@@ -12,7 +12,7 @@ namespace SpaceGame {
             Game
         }
 
-        private static GameStates gameState = GameStates.Menu;
+        private static GameStates gameState = GameStates.Menu; // change to Game to test game
         public static GameStates GameState { get { return gameState; } set { gameState = value } }
 
         private static RenderWindow gameWindow;
@@ -54,15 +54,21 @@ namespace SpaceGame {
                 gameWindow.Clear();
 
                 switch (GameState) {
-                    
-                }
-                // update (only if focused)
-                if (Focused) {
-                    sector.Update(gameWindow);
+                    case GameStates.Menu:
+                        // game menu
+                        break;
+
+                    case GameStates.Game:
+                        // update (only if focused)
+                        if (Focused) {
+                            sector.Update(gameWindow);
+                        }
+
+                        // draw
+                        sector.Draw(ref gameWindow);
+                        break;
                 }
 
-                // draw
-                sector.Draw(ref gameWindow);
 
                 gameWindow.Display();
             }

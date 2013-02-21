@@ -27,7 +27,7 @@ namespace SpaceGame {
                                 reader.Read(); this.MaxHealth = int.Parse(reader.Value); break;
                             case "Velocity":
                                 reader.Read(); this.Velocity = int.Parse(reader.Value); break;
-                            case "Shield":a
+                            case "Shield":
                                 reader.Read(); this.MaxShield = int.Parse(reader.Value); break;
                             case "ShieldRegen":
                                 reader.Read(); this.ShieldRegen = int.Parse(reader.Value); break;

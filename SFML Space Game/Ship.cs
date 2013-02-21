@@ -20,18 +20,9 @@ namespace SpaceGame {
         private int maxShield;
         private int shieldRegen;
 
-
-
         public int ShieldRegen;
 
-       
-
-
-
-        public void Read(string name) {
-
         public Ship(string name) {
-
             using (XmlReader reader = XmlReader.Create("res/ship/" + name)) {
                 while (reader.Read()) {
                     if (reader.IsStartElement()) {
@@ -48,19 +39,13 @@ namespace SpaceGame {
 
                                 reader.Read(); this.ShieldRegen = int.Parse(reader.Value); break;
 
-                   reader.Read(); shieldRegen = int.Parse(reader.Value); break;
+                                reader.Read(); shieldRegen = int.Parse(reader.Value); break;
 
                         }
                     }
                 }
             }
         }
-    }
-
-
-         
-
-
 
         public void DisplayStats() {
             Console.WriteLine("Type: " + ShipType);
@@ -69,9 +54,5 @@ namespace SpaceGame {
             Console.WriteLine("Shield: " + MaxShield);
             Console.WriteLine("Shield regeneration rate: " + ShieldRegen);
         }
-
-
-
-       
     }
 }

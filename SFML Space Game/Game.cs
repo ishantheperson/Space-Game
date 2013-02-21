@@ -13,7 +13,7 @@ namespace SpaceGame {
         }
 
         private static GameStates gameState = GameStates.Menu; // change to Game to test game
-        public static GameStates GameState { get { return gameState; } set { gameState = value } }
+        public static GameStates GameState { get { return gameState; } set { gameState = value; } }
 
         private static RenderWindow gameWindow;
 

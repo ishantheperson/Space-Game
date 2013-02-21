@@ -5,7 +5,7 @@ using SFML.Window;
 
 namespace SpaceGame {
     public class Fadable : DrawableGameObject {
-        private byte opacity = 0;
+        private int opacity = 0;
         private Sprite sprite;
         private Texture texture;
 
@@ -32,7 +32,7 @@ namespace SpaceGame {
             if (opacity < 255 && !flip) sprite.Color = new Color(0, 0, 0, opacity++);
             else flip = true;
 
-            if (opacity == 0) Completed(this, EventArgs.Empty);
+            if (opacity == 0) FadeCompletedEventHandler(this, EventArgs.Empty);
             if (flip) sprite.Color = new Color(0, 0, 0, opacity--);
         } 
 

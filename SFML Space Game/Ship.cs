@@ -18,7 +18,7 @@ namespace SpaceGame
         public int SheildRegen;
         public void Read(string location)
         {
-            using (XmlReader reader = XmlReader.Create(location))
+            using (XmlReader reader = XmlReader.Create(@"res\ship\" + location))
             {
                 while (reader.Read())
                 {
@@ -27,7 +27,6 @@ namespace SpaceGame
                         switch (reader.Name)
                         {
                             case "Statistics":
-                                {
                                     reader.Read();
                                     while (true)
                                     {
@@ -52,12 +51,17 @@ namespace SpaceGame
                                         }
                                     }
                                     break;
-                                }
+                                
 
                         }
                     }
                 }
             }
+        }
+        public void DisplayStats()
+        {
+            Console.WriteLine("Health" + MaxHealth);
+
         }
     }
 }

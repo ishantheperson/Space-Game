@@ -6,12 +6,11 @@ using System.Xml;
 
 using SFML.Graphics;
 using SFML.Window;
-<<<<<<< HEAD
+
 
 using System.IO;
 
-=======
->>>>>>> 0e43460393fc761192964dabcf62cb3e194703a6
+
 
 namespace SpaceGame {
     public class Ship {
@@ -21,7 +20,7 @@ namespace SpaceGame {
         private int maxShield;
         private int shieldRegen;
 
-<<<<<<< HEAD
+
 
         public int ShieldRegen;
 
@@ -30,9 +29,9 @@ namespace SpaceGame {
 
 
         public void Read(string name) {
-=======
+
         public Ship(string name) {
->>>>>>> 0e43460393fc761192964dabcf62cb3e194703a6
+
             using (XmlReader reader = XmlReader.Create("res/ship/" + name)) {
                 while (reader.Read()) {
                     if (reader.IsStartElement()) {
@@ -46,18 +45,18 @@ namespace SpaceGame {
                             case "Shield":
                                 reader.Read(); maxShield = int.Parse(reader.Value); break;
                             case "ShieldRegen":
-<<<<<<< HEAD
+
                                 reader.Read(); this.ShieldRegen = int.Parse(reader.Value); break;
 
-=======
-                                reader.Read(); shieldRegen = int.Parse(reader.Value); break;
->>>>>>> 0e43460393fc761192964dabcf62cb3e194703a6
+                   reader.Read(); shieldRegen = int.Parse(reader.Value); break;
+
                         }
                     }
                 }
             }
         }
-<<<<<<< HEAD
+    }
+
 
          
 
@@ -69,12 +68,10 @@ namespace SpaceGame {
             Console.WriteLine("Velocity: " + Velocity);
             Console.WriteLine("Shield: " + MaxShield);
             Console.WriteLine("Shield regeneration rate: " + ShieldRegen);
-
-=======
-
-        public void DisplayStats() {
-            Console.WriteLine("Health: " + maxHealth);
->>>>>>> 0e43460393fc761192964dabcf62cb3e194703a6
         }
+
+
+
+       
     }
 }

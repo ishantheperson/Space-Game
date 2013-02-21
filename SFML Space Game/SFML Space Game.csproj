@@ -86,7 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="res\music\explore.ogg" />
+    <None Include="res\music\explore.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="csfml-audio-2.dll">
@@ -106,11 +108,24 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="res\image\BattleCruiserNoEngines.png" />
-    <Content Include="res\image\player.png" />
-    <Content Include="res\image\SplashImage.png" />
-    <Content Include="res\image\ViperNoEngines.png" />
-    <Content Include="res\level\test.xml" />
+    <None Include="res\image\BattleCruiserNoEngines.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="res\image\player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="res\image\SplashImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="res\image\ViperNoEngines.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="res\image\ui\splash.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="res\level\test.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

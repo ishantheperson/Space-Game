@@ -33,9 +33,6 @@ namespace SpaceGame {
         public override void Update(RenderWindow window) {
             if (Mouse.IsButtonPressed(Mouse.Button.Left) && Game.Focused) {
                 moveLocation = Mouse.GetPosition(window);
-
-                // calculate angle from here to there
-
                 move = true;
             }
 
@@ -49,10 +46,12 @@ namespace SpaceGame {
                     rotation = (float)((float)(180 / Math.PI) * Math.Atan2(direction.Y, direction.X));
 
                     if (rotation > sprite.Rotation) {
-                        sprite.Rotation += 1;
+                        if (Math.Abs(sprite.Rotation - rotation) < 3) sprite.Rotation = rotation;
+                        sprite.Rotation += 3;
                     }
                     if (rotation < sprite.Rotation) {
-                        sprite.Rotation -= 1;
+                        if (Math.Abs(sprite.Rotation - rotation) < 3) sprite.Rotation = rotation;
+                        sprite.Rotation -= 3;
                     }
 
                     Console.WriteLine("X {0} Y {1} R {4} move x {2} y {3}", sprite.Position.X, sprite.Position.Y, moveLocation.X, moveLocation.Y, sprite.Rotation);

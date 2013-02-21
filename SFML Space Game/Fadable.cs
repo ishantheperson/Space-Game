@@ -29,15 +29,11 @@ namespace SpaceGame {
         }
 
         public override void Update(RenderWindow window) {
-            if (opacity < 255 && !flip) {
-                sprite.Color = new Color(0, 0, 0, opacity++);
-            }
-            else {
-                flip = true;
-            }
+            if (opacity < 255 && !flip) sprite.Color = new Color(0, 0, 0, opacity++);
+            else flip = true;
 
             if (opacity == 0) Completed(this, EventArgs.Empty);
-            sprite.Color = new Color(0, 0, 0, opacity--);
+            if (flip) sprite.Color = new Color(0, 0, 0, opacity--);
         } 
 
         public override void Draw(ref RenderWindow window) {

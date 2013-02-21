@@ -44,7 +44,7 @@ namespace SpaceGame
                                                     this.Velocity = int.Parse(reader.Value); break;
                                                 case "Shield":
                                                     this.MaxShield = int.Parse(reader.Value); break;
-                                                case "SheildRegen":
+                                                case "ShieldRegen":
                                                     this.SheildRegen = int.Parse(reader.Value); break;
                                             }
 

@@ -38,7 +38,7 @@ namespace SpaceGame {
 
             sector = new Sector("test.xml");
             Ship ship = new Ship();
-            ship.Read("ship uno.xml");
+            ship.Read("ShipOne.xml");
             ship.DisplayStats();
             //splashScreen = new Fadable("ui/splash.png", new Vector2f());
             //splashScreen.Completed += (sender, args) => splash = false;

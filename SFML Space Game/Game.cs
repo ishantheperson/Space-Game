@@ -14,6 +14,9 @@ namespace SpaceGame {
 
         public static bool Focused { get; set; }
 
+        private static bool splash = true;
+        private static Fadable splashScreen;
+
         private static Sector sector;
 
         public static View View { get { return gameWindow.GetView(); } set { gameWindow.SetView(value); } }
@@ -23,8 +26,13 @@ namespace SpaceGame {
             
             Loop();
         }
-        
-        public static void Loop() {
+
+        private static void Splash() {
+            splashScreen.Update(gameWindow);
+            splashScreen.Draw(ref gameWindow);
+        }
+
+        private static void Loop() {
             gameWindow = new RenderWindow(new VideoMode(WindowWidth, WindowHeight), WindowTitle);
             gameWindow.Closed += (sender, args) => gameWindow.Close();
             gameWindow.SetFramerateLimit(60);
@@ -35,18 +43,25 @@ namespace SpaceGame {
 
             sector = new Sector("test.xml");
 
+            splashScreen = new Fadable("ui/splash.png", new Vector2f());
+            splashScreen.Completed += (sender, args) => splash = false;
+
             while (gameWindow.IsOpen()) {
                 gameWindow.DispatchEvents();
                 gameWindow.Clear();
 
-                // update (only if focused)
-                if (Focused) {
-                    sector.Update(gameWindow);
+                if (!splash) {
+                    // update (only if focused)
+                    if (Focused) {
+                        sector.Update(gameWindow);
+                    }
+
+                    // draw
+                    sector.Draw(ref gameWindow);
                 }
-
-                // draw
-                sector.Draw(ref gameWindow);
-
+                else {
+                    Splash();
+                }
                 gameWindow.Display();
             }
         }

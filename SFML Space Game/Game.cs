@@ -15,7 +15,7 @@ namespace SpaceGame {
         public static bool Focused { get; set; }
 
         private static bool splash = true;
-        private static Fadable splashScreen;
+        //private static Fadable splashScreen;
 
         private static Sector sector;
 
@@ -37,15 +37,17 @@ namespace SpaceGame {
             gameWindow.LostFocus += (sender, args) => Focused = false;
 
             sector = new Sector("test.xml");
-
-            splashScreen = new Fadable("ui/splash.png", new Vector2f());
-            splashScreen.Completed += (sender, args) => splash = false;
+            Ship ship = new Ship();
+            ship.Read("ship uno.xml");
+            ship.DisplayStats();
+            //splashScreen = new Fadable("ui/splash.png", new Vector2f());
+            //splashScreen.Completed += (sender, args) => splash = false;
 
             while (gameWindow.IsOpen()) {
                 gameWindow.DispatchEvents();
                 gameWindow.Clear();
 
-                if (!splash) {
+                /*if (!splash) {
                     // update (only if focused)
                     if (Focused) {
                         sector.Update(gameWindow);
@@ -57,7 +59,7 @@ namespace SpaceGame {
                 else {
                     splashScreen.Update(gameWindow);
                     splashScreen.Draw(ref gameWindow);
-                }
+                }*/
                 gameWindow.Display();
             }
         }

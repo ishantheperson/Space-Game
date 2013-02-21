@@ -108,6 +108,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\ship\test.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="res\image\BattleCruiserNoEngines.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

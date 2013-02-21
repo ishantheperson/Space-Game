@@ -27,11 +27,6 @@ namespace SpaceGame {
             Loop();
         }
 
-        private static void Splash() {
-            splashScreen.Update(gameWindow);
-            splashScreen.Draw(ref gameWindow);
-        }
-
         private static void Loop() {
             gameWindow = new RenderWindow(new VideoMode(WindowWidth, WindowHeight), WindowTitle);
             gameWindow.Closed += (sender, args) => gameWindow.Close();
@@ -60,7 +55,8 @@ namespace SpaceGame {
                     sector.Draw(ref gameWindow);
                 }
                 else {
-                    Splash();
+                    splashScreen.Update(gameWindow);
+                    splashScreen.Draw(ref gameWindow);
                 }
                 gameWindow.Display();
             }

@@ -34,11 +34,8 @@ namespace SpaceGame {
             gameWindow.LostFocus += (sender, args) => Focused = false;
 
             sector = new Sector("test.xml");
-            Ship ship = new Ship();
+            Ship ship = new Ship("test.xml");
 
-            ship.Read("ShipOne.xml");
-
-            ship.Read("test.xml");
             ship.DisplayStats();
             //splashScreen = new Fadable("ui/splash.png", new Vector2f());
             //splashScreen.Completed += (sender, args) => splash = false;

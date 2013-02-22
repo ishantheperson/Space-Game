@@ -21,14 +21,10 @@ namespace SpaceGame {
         private int shieldRegen;
 
 
-
-        public int ShieldRegen;
-
        
 
 
 
-        public void Read(string name) {
 
         public Ship(string name) {
 
@@ -44,18 +40,15 @@ namespace SpaceGame {
                                 reader.Read(); velocity = int.Parse(reader.Value); break;
                             case "Shield":
                                 reader.Read(); maxShield = int.Parse(reader.Value); break;
-                            case "ShieldRegen":
-
-                                reader.Read(); this.ShieldRegen = int.Parse(reader.Value); break;
-
-                   reader.Read(); shieldRegen = int.Parse(reader.Value); break;
+                            case "shieldRegen":
+                                reader.Read(); shieldRegen = int.Parse(reader.Value); break;
 
                         }
                     }
                 }
             }
         }
-    }
+    
 
 
          
@@ -63,11 +56,11 @@ namespace SpaceGame {
 
 
         public void DisplayStats() {
-            Console.WriteLine("Type: " + ShipType);
-            Console.WriteLine("Health: " + MaxHealth);
-            Console.WriteLine("Velocity: " + Velocity);
-            Console.WriteLine("Shield: " + MaxShield);
-            Console.WriteLine("Shield regeneration rate: " + ShieldRegen);
+            Console.WriteLine("Type: " + shipType);
+            Console.WriteLine("Health: " + maxHealth);
+            Console.WriteLine("Velocity: " + velocity);
+            Console.WriteLine("Shield: " + maxShield);
+            Console.WriteLine("Shield regeneration rate: " + shieldRegen);
         }
 
 

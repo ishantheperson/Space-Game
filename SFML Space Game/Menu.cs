@@ -7,7 +7,7 @@ using SFML.Window;
 namespace SpaceGame {
     public class Menu {
         public delegate void MenuButtonClickedHandler(object sender, EventArgs args);
-
+        public Event theEvent = new Event();
         private static Font font = new Font("res/font.otf");
 
         #region Menu Button Class

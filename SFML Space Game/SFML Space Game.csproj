@@ -78,6 +78,7 @@
     <Compile Include="DrawableGameObject.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="MainMenu.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,6 +110,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\font.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="res\ship\test.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

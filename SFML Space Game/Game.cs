@@ -6,6 +6,15 @@ using SFML.Window;
 
 namespace SpaceGame {
     public class Game {
+        private static enum GameStates {
+            Splash,
+            Menu,
+            Game
+        }
+
+        private static GameStates gameState = GameStates.Menu; // change to Game to test game
+        public static GameStates GameState { get { return gameState; } set { gameState = value; } }
+
         private static RenderWindow gameWindow;
 
         public const int WindowWidth = 800;
@@ -44,13 +53,22 @@ namespace SpaceGame {
                 gameWindow.DispatchEvents();
                 gameWindow.Clear();
 
-                // update (only if focused)
-                if (Focused) {
-                    sector.Update(gameWindow);
+                switch (GameState) {
+                    case GameStates.Menu:
+                        // game menu
+                        break;
+
+                    case GameStates.Game:
+                        // update (only if focused)
+                        if (Focused) {
+                            sector.Update(gameWindow);
+                        }
+
+                        // draw
+                        sector.Draw(ref gameWindow);
+                        break;
                 }
 
-                // draw
-                sector.Draw(ref gameWindow);
 
                 gameWindow.Display();
             }

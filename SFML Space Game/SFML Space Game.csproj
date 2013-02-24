@@ -116,6 +116,7 @@
     </None>
     <None Include="res\ship\test.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="res\image\BattleCruiserNoEngines.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

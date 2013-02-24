@@ -6,7 +6,7 @@ using SFML.Window;
 
 namespace SpaceGame {
     public class Game {
-        private static enum GameStates {
+        public enum GameStates {
             Splash,
             Menu,
             Game

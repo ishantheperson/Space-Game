@@ -18,6 +18,8 @@ namespace SpaceGame {
 
             public event MenuButtonClickedHandler Clicked;
 
+            private bool beingClicked = false;
+
             public MenuButton(string text, float position, MenuButtonClickedHandler onClicked) {
                 this.text = new Text(text, font, 48);
 
@@ -28,33 +30,46 @@ namespace SpaceGame {
                 shape.Origin = new Vector2f(200 / 2, 75 / 2);
                 shape.Position = new Vector2f(Game.WindowWidth / 2, position);
 
-                shape.OutlineColor = Color.Black;
+                shape.OutlineColor = Color.White;
                 shape.OutlineThickness = 3;
 
-                shape.FillColor = Color.White;
+                shape.FillColor = new Color(255, 255, 255, 100);
                 #endregion
 
                 this.text.Origin = new Vector2f(this.text.GetLocalBounds().Width / 2, this.text.GetLocalBounds().Height / 2);
-                this.text.Position = new Vector2f(shape.Position.X + shape.Size.X / 2, shape.Position.Y + shape.Size.Y / 2);
+                this.text.Position = shape.Position;
 
                 Clicked += onClicked;
             }
 
             public void Update(RenderWindow window) {
-                if (Mouse.IsButtonPressed(Mouse.Button.Left)) {
-                    float x1, y1, x2, y2;
+                float x1, y1, x2, y2;
 
-                    x1 = shape.Position.X; // rect.Left; 
-                    y1 = shape.Position.Y + shape.Size.Y; // rect.Top + rect.Height;
+                x1 = shape.Position.X; // rect.Left; 
+                y1 = shape.Position.Y + shape.Size.Y; // rect.Top + rect.Height;
 
-                    x2 = shape.Position.X + shape.Size.X; // rect.Left + rect.Width;
-                    y2 = shape.Position.Y; // rect.Top;
+                x2 = shape.Position.X + shape.Size.X; // rect.Left + rect.Width;
+                y2 = shape.Position.Y; // rect.Top;
 
-                    Vector2i point = Mouse.GetPosition(window);
-                    if ((x1 <= point.X) && (point.X <= x2) && (y1 <= point.X) && (point.Y <= y2)) {
+                Vector2i point = Mouse.GetPosition(window);
+                if ((x1 <= point.X) && (point.X <= x2) && (y1 <= point.X) && (point.Y <= y2)) {
+                    if (Mouse.IsButtonPressed(Mouse.Button.Left)) {
+                        beingClicked = true;
                         Console.WriteLine("INFO: button " + text + " clicked");
-                        Clicked(this, EventArgs.Empty);
+                        shape.FillColor = new Color(255, 255, 255, 200);
                     }
+                    else if (beingClicked) {
+                        Console.Write("Being clicked");
+                        Clicked(this, EventArgs.Empty);
+                        shape.FillColor = new Color(255, 255, 255, 0);
+                    }
+                    else {
+                        Console.WriteLine("Mouseover");
+                        shape.FillColor = new Color(255, 255, 255, 150);
+                    }
+                }
+                else {
+                    shape.FillColor = new Color(255, 255, 255, 100);
                 }
             }
 

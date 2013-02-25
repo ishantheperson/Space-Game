@@ -6,6 +6,7 @@ using SFML.Window;
 
 namespace SpaceGame {
     public class Game {
+        #region Game State
         public enum GameStates {
             Splash,
             Menu,
@@ -14,12 +15,17 @@ namespace SpaceGame {
 
         private static GameStates gameState = GameStates.Menu; // change to Game to test game
         public static GameStates GameState { get { return gameState; } set { gameState = value; } }
+        #endregion
 
+        #region Window
         private static RenderWindow gameWindow;
 
         public const int WindowWidth = 800;
         public const int WindowHeight = 600;
         public const string WindowTitle = "The Amazing C# Space Game";
+        #endregion
+
+        private static Menu menu = new Menu();
 
         public static bool Focused { get; set; }
 
@@ -56,6 +62,8 @@ namespace SpaceGame {
                 switch (GameState) {
                     case GameStates.Menu:
                         // game menu
+                        menu.Update(gameWindow);
+                        menu.Draw(ref gameWindow);
                         break;
 
                     case GameStates.Game:

@@ -5,13 +5,13 @@ using SFML.Graphics;
 using SFML.Window;
 
 namespace SpaceGame {
-    public class Menu {
+    public class Menu : DrawableGameObject {
         public delegate void MenuButtonClickedHandler(object sender, EventArgs args);
         public Event theEvent = new Event();
         private static Font font = new Font("res/font.otf");
 
         #region Menu Button Class
-        class MenuButton : DrawableGameObject{
+        class MenuButton {
             private Text text;
 
             private RectangleShape shape;
@@ -31,19 +31,52 @@ namespace SpaceGame {
                 shape.OutlineThickness = 3;
 
                 shape.FillColor = Color.White;
+                this.text.Origin = new Vector2f(this.text.GetLocalBounds().Width / 2, this.text.GetLocalBounds().Height / 2);
+                this.text.Position = new Vector2f(shape.Position.X + shape.Size.X / 2, shape.Position.Y + shape.Size.Y / 2);
             }
-            #endregion
 
-            public override void Update(RenderWindow window) {
+            public void Update(RenderWindow window) {
                 FloatRect rect = shape.GetGlobalBounds();
-                int x1, x2, y1, y2;
+                float x1, y1, x2, y2;
+
+                x1 = rect.Left;
+                y1 = rect.Top + rect.Height;
+
+                x2 = rect.Left + rect.Width;
+                y2 = rect.Top;
+
+                Vector2i point = Mouse.GetPosition(window);
+                if ((x1 <= point.X) && (point.X <= x2) && (y1 <= point.Y) && (point.Y <= y2)) {
+                    // inside
+                    Console.WriteLine("INFO: button " + text + " clicked");
+                    Clicked(this, EventArgs.Empty);
+                }
             }
 
-            public override void Draw(ref RenderWindow window) {
-                
+            public void Draw(ref RenderWindow window) {
+                window.Draw(shape);
+                window.Draw(text);
+            }
+        }
+        #endregion
+
+        List<MenuButton> buttons = new List<MenuButton>();
+
+        public Menu() {
+            buttons.Add(new MenuButton("Play", 200));
+        }
+
+        public override void Update(RenderWindow window) {
+            foreach (MenuButton button in buttons) {
+                button.Update(window);
             }
         }
 
+        public override void Draw(ref RenderWindow window) {
+            foreach (MenuButton button in buttons) {
+                button.Draw(ref window);
+            }
+        }
         // class
     }
 }

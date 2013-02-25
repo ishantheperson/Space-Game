@@ -62,21 +62,19 @@ namespace SpaceGame {
                 switch (GameState) {
                     case GameStates.Menu:
                         // game menu
-                        menu.Update(gameWindow);
+                        if (Focused) menu.Update(gameWindow);
                         menu.Draw(ref gameWindow);
+                        Console.WriteLine("INFO: Gamestate = Menu");
                         break;
 
                     case GameStates.Game:
+                        Console.WriteLine("INFO: GameState = Game");
                         // update (only if focused)
-                        if (Focused) {
-                            sector.Update(gameWindow);
-                        }
-
+                        if (Focused) sector.Update(gameWindow);
                         // draw
                         sector.Draw(ref gameWindow);
                         break;
                 }
-
 
                 gameWindow.Display();
             }

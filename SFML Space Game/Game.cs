@@ -56,7 +56,9 @@ namespace SpaceGame {
             //splashScreen.Completed += (sender, args) => splash = false;
 
             while (gameWindow.IsOpen()) {
+                Console.WriteLine("INFO: Dispatching events..");
                 gameWindow.DispatchEvents();
+                Console.WriteLine("INFO: Dispatched");
                 gameWindow.Clear();
 
                 switch (GameState) {
@@ -64,7 +66,7 @@ namespace SpaceGame {
                         // game menu
                         if (Focused) menu.Update(gameWindow);
                         menu.Draw(ref gameWindow);
-                        Console.WriteLine("INFO: Gamestate = Menu");
+                        Console.WriteLine("INFO: GameState = Menu");
                         break;
 
                     case GameStates.Game:

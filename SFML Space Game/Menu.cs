@@ -52,7 +52,6 @@ namespace SpaceGame {
 
                     Vector2i point = Mouse.GetPosition(window);
                     if ((x1 <= point.X) && (point.X <= x2) && (y1 <= point.X) && (point.Y <= y2)) {
-                        // inside
                         Console.WriteLine("INFO: button " + text + " clicked");
                         Clicked(this, EventArgs.Empty);
                     }

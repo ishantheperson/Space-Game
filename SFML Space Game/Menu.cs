@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using SFML.Graphics;
 using SFML.Window;
+using System.Diagnostics;
 
 namespace SpaceGame {
     public class Menu : DrawableGameObject {
@@ -27,8 +28,7 @@ namespace SpaceGame {
 
                 #region Shape Appearance
                 shape.Size = new Vector2f(200, 75);
-                shape.Origin = new Vector2f(200 / 2, 75 / 2);
-                shape.Position = new Vector2f(Game.WindowWidth / 2, position);
+                shape.Position = new Vector2f(Game.WindowWidth / 2 - 100, position);
 
                 shape.OutlineColor = Color.White;
                 shape.OutlineThickness = 3;
@@ -36,8 +36,8 @@ namespace SpaceGame {
                 shape.FillColor = new Color(255, 255, 255, 100);
                 #endregion
 
-                this.text.Origin = new Vector2f(this.text.GetLocalBounds().Width / 2, this.text.GetLocalBounds().Height / 2);
-                this.text.Position = shape.Position;
+                // this.text.Origin = new Vector2f(this.text.GetLocalBounds().Width / 2, this.text.GetLocalBounds().Height / 2);
+                this.text.Position = new Vector2f(shape.Position.X + 50, shape.Position.Y );
 
                 Clicked += onClicked;
             }
@@ -52,7 +52,11 @@ namespace SpaceGame {
                 y2 = shape.Position.Y; // rect.Top;
 
                 Vector2i point = Mouse.GetPosition(window);
-                if ((x1 <= point.X) && (point.X <= x2) && (y1 <= point.X) && (point.Y <= y2)) {
+                Console.WriteLine("left x {0} lower left y {1} right x {2} right y{3} {4} {5}", x1, y1, x2, y2, point.X, point.Y);
+                if (Mouse.IsButtonPressed(Mouse.Button.Right)) {
+                    Debugger.Break();
+                }
+                if ((x1 <= point.X) && (point.X <= x2) && (y1 >= point.Y) && (point.Y >= y2)) {
                     if (Mouse.IsButtonPressed(Mouse.Button.Left)) {
                         beingClicked = true;
                         Console.WriteLine("INFO: button " + text + " clicked");

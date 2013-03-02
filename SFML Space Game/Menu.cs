@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using SFML.Graphics;
 using SFML.Window;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace SpaceGame {
     public class Menu : DrawableGameObject {

@@ -24,6 +24,7 @@ namespace SpaceGame {
                 while (reader.Read()) {
                     if (reader.IsStartElement()) {
                         switch (reader.Name) {
+                            #region Level Size
                             case "Size":
                                 Console.WriteLine("INFO: Size component started");
                                 reader.Read();
@@ -46,7 +47,8 @@ namespace SpaceGame {
                                 }
                                 Console.WriteLine("INFO: Size component ended");
                                 break;
-
+                            #endregion
+                            #region Starfield
                             case "Starfield": // starfield exists
                                 int count = 0;
                                 Color color = new Color();
@@ -100,6 +102,7 @@ namespace SpaceGame {
 
                                 objects.Add("starfield", new Starfield(count, color, size));
                                 break;
+                            #endregion
                         }
                     }
                 }

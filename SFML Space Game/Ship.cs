@@ -1,34 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
-
-using SFML.Graphics;
-using SFML.Window;
-
-
-using System.IO;
-
-
+using System.Collections.Generic;
 
 namespace SpaceGame {
     public class Ship : DrawableGameObject {
-        private string shipType;
-        private int maxHealth;
+        private string name = "default";
+        private int maxHealth = 100;
         private int velocity;
         private int maxShield;
         private int shieldRegen;
 
         public int ShieldRegen { get { return shieldRegen; } set { shieldRegen = value; } }
 
+        /// <summary>
+        /// Creates a new ship with stats from a file
+        /// </summary>
+        /// <param name="name">File path in res/ship/</param>
         public Ship(string name) {
+            #region Ship Stats
             using (XmlReader reader = XmlReader.Create("res/ship/" + name)) {
                 while (reader.Read()) {
                     if (reader.IsStartElement()) {
                         switch (reader.Name) {
-                            case "Type":
-                                reader.Read(); shipType = reader.Value; break;
+                            case "Name":
+                                reader.Read(); name = reader.Value; break;
                             case "Health":
                                 reader.Read(); maxHealth = int.Parse(reader.Value); break;
                             case "Velocity":
@@ -41,10 +36,11 @@ namespace SpaceGame {
                     }
                 }
             }
+            #endregion
         }
 
         public void DisplayStats() {
-            Console.WriteLine("Type: " + shipType);
+            Console.WriteLine("Name: " + name);
             Console.WriteLine("Health: " + maxHealth);
             Console.WriteLine("Velocity: " + velocity);
             Console.WriteLine("Shield: " + maxShield);

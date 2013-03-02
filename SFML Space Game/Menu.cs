@@ -10,7 +10,7 @@ namespace SpaceGame {
     public class Menu : DrawableGameObject {
         public delegate void MenuButtonClickedHandler(object sender, EventArgs args);
         public Event theEvent = new Event();
-        private static Font font = new Font("res/font.otf");
+        private static Font font = new Font("res/font.ttf");
 
         #region Menu Button Class
         public class MenuButton {

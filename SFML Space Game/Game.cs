@@ -27,7 +27,10 @@ namespace SpaceGame {
         public const string WindowTitle = "The Amazing C# Space Game";
         #endregion
 
-        private static Menu menu = new Menu(new Menu.MenuButtonInitializer("Player", (sender, args) => Game.gameState = GameStates.Game));
+        private static Menu menu = new Menu(
+            new Menu.MenuButtonInitializer("Play", (sender, args) => Game.gameState = GameStates.Game),
+            new Menu.MenuButtonInitializer("Exit", (sender, args) => Game.gameState = GameStates.Exit)
+            );
 
         public static bool Focused { get; set; }
 

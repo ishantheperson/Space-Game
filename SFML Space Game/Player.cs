@@ -42,16 +42,19 @@ namespace SpaceGame {
                     move = false;
                 }
                 else {
-                    float angle = AngleBetweenVectors(sprite.Position, moveLocation);
                     Vector2f direction = Normalize(new Vector2f((moveLocation.X - sprite.Position.X), (moveLocation.Y - sprite.Position.Y)));
-                    rotation = (float)((float)(180 / Math.PI) * Math.Atan2(direction.Y, direction.X));
+                    rotation = radianConversian * (float)Math.Atan2(direction.Y, direction.X);
+                    if (Math.Abs(rotation) > 180) {
+                        rotation -= 180;
+                        rotation *= -1;
+                    }
 
-                    if (rotation > sprite.Rotation) {
-                        if (Math.Abs(sprite.Rotation - rotation) < 3) sprite.Rotation = rotation;
+                    if (rotation < 0) {
+                        if (Math.Abs(sprite.Rotation - rotation) < 0) sprite.Rotation = rotation;
                         sprite.Rotation += 3;
                     }
-                    if (rotation < sprite.Rotation) {
-                        if (Math.Abs(sprite.Rotation - rotation) < 3) sprite.Rotation = rotation;
+                    if (rotation > 0) {
+                        if (Math.Abs(sprite.Rotation - rotation) < 0f) sprite.Rotation = rotation;
                         sprite.Rotation -= 3;
                     }
 
@@ -83,6 +86,5 @@ namespace SpaceGame {
             float distance = (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y); // x^2 + y^2 == length (pythagorean theorum)
             return new Vector2f(vector.X / distance, vector.Y / distance);
         }
-
     }
 }

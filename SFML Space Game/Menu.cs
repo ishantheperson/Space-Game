@@ -13,7 +13,7 @@ namespace SpaceGame {
         private static Font font = new Font("res/font.otf");
 
         #region Menu Button Class
-        class MenuButton {
+        public class MenuButton {
             private Text text;
             private RectangleShape shape;
 
@@ -58,6 +58,7 @@ namespace SpaceGame {
                     else if (beingClicked) {
                         Clicked(this, EventArgs.Empty);
                         shape.FillColor = new Color(255, 255, 255, 0);
+                        beingClicked = false;
                     }
                     else {
                         shape.FillColor = new Color(255, 255, 255, 150);
@@ -76,12 +77,27 @@ namespace SpaceGame {
         }
         #endregion
 
+        public struct MenuButtonInitializer {
+            public string Text;
+            public Action<object, EventArgs> Click;
+
+            public MenuButtonInitializer(string text, Action<object, EventArgs> click) {
+                this.Click = click;
+                this.Text = text;
+            }
+        }
+
         List<MenuButton> buttons = new List<MenuButton>();
 
-        public Menu() {
-            buttons.Add(new MenuButton("Play", 200, (sender, args) => Game.GameState = Game.GameStates.Game));
-            buttons.Add(new MenuButton("Options", 300, (sender, args) => { })); // do nothing
-            buttons.Add(new MenuButton("Exit", 400, (sender, args) => Game.GameState = Game.GameStates.Exit));
+        public Menu(params MenuButtonInitializer[] buttons) {
+            //this.buttons.Add(new MenuButton("Play", 200, (sender, args) => Game.GameState = Game.GameStates.Game));
+            //this.buttons.Add(new MenuButton("Options", 300, (sender, args) => { })); // do nothing
+            //this.buttons.Add(new MenuButton("Exit", 400, (sender, args) => Game.GameState = Game.GameStates.Exit));
+            int offset = 200;
+            foreach (MenuButtonInitializer button in buttons) {
+                this.buttons.Add(new MenuButton(button.Text, offset, (sender, args) => { button.Click(this, EventArgs.Empty); }));
+                offset += 100;
+            }
         }
 
         public override void Update(RenderWindow window) {

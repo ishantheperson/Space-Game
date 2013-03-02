@@ -11,7 +11,8 @@ namespace SpaceGame {
             Splash,
             Menu,
             Game,
-            Exit
+            Exit,
+            Pause,
         }
 
         private static GameStates gameState = GameStates.Menu; // change to Game to test game
@@ -26,7 +27,7 @@ namespace SpaceGame {
         public const string WindowTitle = "The Amazing C# Space Game";
         #endregion
 
-        private static Menu menu = new Menu();
+        private static Menu menu = new Menu(new Menu.MenuButtonInitializer("Player", (sender, args) => Game.gameState = GameStates.Game));
 
         public static bool Focused { get; set; }
 
@@ -34,6 +35,9 @@ namespace SpaceGame {
 
         public static View View { get { return gameWindow.GetView(); } set { gameWindow.SetView(value); } }
 
+        #region Pause
+
+        #endregion
         public static void Start() {
             Console.WriteLine("INFO: Game starting...");
 
@@ -47,7 +51,7 @@ namespace SpaceGame {
 
             Focused = true;
             gameWindow.GainedFocus += (sender, args) => Focused = true;
-            gameWindow.LostFocus += (sender, args) => Focused = false;
+            gameWindow.LostFocus += (sender, args) => { Focused = false; gameState = GameStates.Pause; };
 
             sector = new Sector("test.xml");
             Ship ship = new Ship("test.xml");
@@ -68,16 +72,16 @@ namespace SpaceGame {
                         break;
 
                     case GameStates.Game:
-                        // update (only if focused)
-                        if (Focused) sector.Update(gameWindow);
-                        // draw
+                        sector.Update(gameWindow);
                         sector.Draw(ref gameWindow);
                         break;
+
+                    case GameStates.Pause:
+
                         
                     case GameStates.Exit:
-                        return; 
+                        gameWindow.Display(); return;
                 }
-
                 gameWindow.Display();
             }
         }

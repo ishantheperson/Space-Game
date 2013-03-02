@@ -15,11 +15,9 @@ namespace SpaceGame {
         #region Menu Button Class
         class MenuButton {
             private Text text;
-
             private RectangleShape shape;
 
             public event MenuButtonClickedHandler Clicked;
-
             private bool beingClicked = false;
 
             public MenuButton(string text, float position, MenuButtonClickedHandler onClicked) {
@@ -36,8 +34,8 @@ namespace SpaceGame {
 
                 shape.FillColor = new Color(255, 255, 255, 100);
                 #endregion
-
-                this.text.Position = new Vector2f(shape.Position.X + 50, shape.Position.Y );
+                this.text.Origin = new Vector2f(this.text.GetLocalBounds().Width / 2, this.text.GetLocalBounds().Height / 2);
+                this.text.Position = new Vector2f(shape.Position.X + shape.Size.X / 2, shape.Position.Y + shape.Size.Y / 2);
 
                 Clicked += onClicked;
             }
@@ -67,6 +65,7 @@ namespace SpaceGame {
                 }
                 else {
                     shape.FillColor = new Color(255, 255, 255, 100);
+                    beingClicked = false;
                 }
             }
 
@@ -81,6 +80,7 @@ namespace SpaceGame {
 
         public Menu() {
             buttons.Add(new MenuButton("Play", 200, (sender, args) => Game.GameState = Game.GameStates.Game));
+            buttons.Add(new MenuButton("Options", 300, (sender, args) => { })); // do nothing
             buttons.Add(new MenuButton("Exit", 400, (sender, args) => Game.GameState = Game.GameStates.Exit));
         }
 

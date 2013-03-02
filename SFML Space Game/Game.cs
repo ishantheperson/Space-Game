@@ -10,7 +10,8 @@ namespace SpaceGame {
         public enum GameStates {
             Splash,
             Menu,
-            Game
+            Game,
+            Exit
         }
 
         private static GameStates gameState = GameStates.Menu; // change to Game to test game
@@ -72,6 +73,9 @@ namespace SpaceGame {
                         // draw
                         sector.Draw(ref gameWindow);
                         break;
+                        
+                    case GameStates.Exit:
+                        return; 
                 }
 
                 gameWindow.Display();

@@ -16,8 +16,10 @@ namespace SpaceGame {
         public FloatRect Bounds { get { return sprite.GetGlobalBounds(); } }
 
         private float rotation;
+        private bool direction;
 
         private const float radianConversian = (float)(Math.PI / 180);
+        private const float degreeConversion = (float)(180 / Math.PI);
 
         public Player() {
             texture = new Texture(@"res\image\BattleCruiserNoEngines.png");
@@ -43,23 +45,23 @@ namespace SpaceGame {
                 }
                 else {
                     Vector2f direction = Normalize(new Vector2f((moveLocation.X - sprite.Position.X), (moveLocation.Y - sprite.Position.Y)));
-                    rotation = radianConversian * (float)Math.Atan2(direction.Y, direction.X);
-                    if (Math.Abs(rotation) > 180) {
+                    rotation = degreeConversion * (float)Math.Atan2(direction.Y, direction.X);
+
+                    if (Math.Abs(rotation) > 180) { // should not go more than 180
                         rotation -= 180;
                         rotation *= -1;
                     }
 
-                    if (rotation < 0) {
+                    if (rotation > 0) {
                         if (Math.Abs(sprite.Rotation - rotation) < 0) sprite.Rotation = rotation;
                         sprite.Rotation += 3;
                     }
-                    if (rotation > 0) {
-                        if (Math.Abs(sprite.Rotation - rotation) < 0f) sprite.Rotation = rotation;
+                    if (rotation < sprite.Rotation) {
+                        if (Math.Abs(sprite.Rotation - rotation) < 0) sprite.Rotation = rotation;
                         sprite.Rotation -= 3;
                     }
 
                     Console.WriteLine("X {0} Y {1} R {4} move x {2} y {3}", sprite.Position.X, sprite.Position.Y, moveLocation.X, moveLocation.Y, sprite.Rotation);
-                    // Vector2f forward = Normalize(new Vector2f(moveLocation.X - sprite.Position.X, moveLocation.Y - sprite.Position.Y));
                     Vector2f forward = Normalize(new Vector2f((float)Math.Cos(sprite.Rotation * radianConversian), (float)Math.Sin(sprite.Rotation * radianConversian)));
 
                     forward *= 2;
@@ -67,7 +69,7 @@ namespace SpaceGame {
                 }
             }
         }
-
+        
         public override void Draw(ref RenderWindow window) {
             window.Draw(sprite);
         }

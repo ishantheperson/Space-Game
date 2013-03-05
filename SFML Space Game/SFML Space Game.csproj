@@ -102,6 +102,7 @@
     <Compile Include="Ship.cs" />
     <Compile Include="ShipTypes.cs" />
     <Compile Include="Starfield.cs" />
+    <Compile Include="WeaponsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -131,6 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="res\ship\types.txt" />
+    <None Include="res\weapon\weapons.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="res\ship\test.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -175,6 +179,9 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="res\xml\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

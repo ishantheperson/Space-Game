@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Weapons>
+  <Default>
+    <Name></Name>
+    <FireRate>2.5</FireRate>
+    <Damage>3</Damage>
+  </Default>
+
+  <Missile>
+    <Name>Incredibly Overpowered Missile</Name>
+    <FireRate>5</FireRate>
+    <Damage>500</Damage>
+  </Missile>
+</Weapons>

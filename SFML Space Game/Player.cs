@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 using SFML.Graphics;
@@ -7,6 +6,7 @@ using SFML.Window;
 
 namespace SpaceGame {
     public class Player : DrawableGameObject {
+        #region Graphics
         private Texture texture;
         public Sprite sprite;
 
@@ -16,10 +16,12 @@ namespace SpaceGame {
         public FloatRect Bounds { get { return sprite.GetGlobalBounds(); } }
 
         private float rotation;
-        private bool direction;
 
         private const float radianConversian = (float)(Math.PI / 180);
         private const float degreeConversion = (float)(180 / Math.PI);
+        #endregion
+
+        WeaponsProvider.Weapon weapon = WeaponsProvider.GetWeapon("Missile");
 
         public Player() {
             texture = new Texture(@"res\image\BattleCruiserNoEngines.png");
@@ -37,6 +39,8 @@ namespace SpaceGame {
             if (Mouse.IsButtonPressed(Mouse.Button.Left) && Game.Focused) {
                 moveLocation = Mouse.GetPosition(window);
                 move = true;
+
+                Console.WriteLine(weapon);
             }
 
             if (move) {
@@ -61,7 +65,6 @@ namespace SpaceGame {
                         sprite.Rotation -= 3;
                     }
 
-                    Console.WriteLine("X {0} Y {1} R {4} move x {2} y {3}", sprite.Position.X, sprite.Position.Y, moveLocation.X, moveLocation.Y, sprite.Rotation);
                     Vector2f forward = Normalize(new Vector2f((float)Math.Cos(sprite.Rotation * radianConversian), (float)Math.Sin(sprite.Rotation * radianConversian)));
 
                     forward *= 2;

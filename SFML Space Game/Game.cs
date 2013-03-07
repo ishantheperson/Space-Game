@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using SFML.Graphics;
 using SFML.Window;
 
+using SpaceGame;
+using SpaceGame.Procedural;
+
 namespace SpaceGame {
     public class Game {
         #region Game State
@@ -35,6 +38,7 @@ namespace SpaceGame {
         public static bool Focused { get; set; }
 
         private static Sector sector;
+        private static Nebula nebula = new Nebula(Game.WindowWidth, Game.WindowHeight, 8);
 
         public static View View { get { return gameWindow.GetView(); } set { gameWindow.SetView(value); } }
 
@@ -75,6 +79,8 @@ namespace SpaceGame {
                         break;
 
                     case GameStates.Game:
+                        nebula.Draw(ref gameWindow);
+
                         sector.Update(gameWindow);
                         sector.Draw(ref gameWindow);
                         break;

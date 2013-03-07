@@ -96,6 +96,7 @@
     <Compile Include="Gibberish.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Procedural\Nebula.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sector.cs" />
@@ -156,6 +157,7 @@
     </None>
     <Content Include="res\level\test.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

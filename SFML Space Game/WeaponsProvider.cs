@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
 
 namespace SpaceGame {
@@ -10,7 +7,7 @@ namespace SpaceGame {
         private static bool loaded = false;
 
 
-        public struct Weapon {
+        public struct Weapon {  
             /// <summary>
             /// Descriptive Name
             /// </summary>

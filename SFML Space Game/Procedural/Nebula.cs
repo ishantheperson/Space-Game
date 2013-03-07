@@ -30,6 +30,8 @@ namespace SpaceGame.Procedural {
                 }
             }
 
+            nebula = ApplyGradient(new Color(255, 100, 0, 255), Color.Red, perlinNoise);
+            
             nebulaTexture = new Texture(nebula);
             this.nebula = new Sprite(nebulaTexture);
         }
@@ -42,6 +44,27 @@ namespace SpaceGame.Procedural {
             return x * (1 - a) + (a * y);
         }
 
+        private Color ApplyGradientColor(Color start, Color end, float t) {
+            float u = 1 - t;
+            return new Color((byte)((int)start.R * u + end.R * t), (byte)((int)start.G * u + end.G * t), (byte)((int)start.B * u + end.B * t), 255);
+        }
+
+        private Image ApplyGradient(Color start, Color end, float[,] noise) {
+            uint width = (uint) noise.GetLength(0);
+            uint height = (uint) noise.GetLength(1);
+
+            Image image = new Image(width, height);
+
+            for (uint x = 0; x < width; x++) {
+                for (uint y = 0; y < height; y++) {
+                    image.SetPixel(x, y, ApplyGradientColor(start, end, noise[x, y]));
+                }
+            }
+
+            return image;
+        }
+
+        #region Noise Functions
         /// <summary>
         /// Generates array with values from 0.0 to 1.0
         /// </summary>
@@ -137,5 +160,6 @@ namespace SpaceGame.Procedural {
 
             return perlinNoise;
         }
+        #endregion
     }
 }

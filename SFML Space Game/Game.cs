@@ -38,7 +38,7 @@ namespace SpaceGame {
         public static bool Focused { get; set; }
 
         private static Sector sector;
-        private static Nebula nebula = new Nebula(Game.WindowWidth, Game.WindowHeight, 8);
+        private static Nebula nebula = new Nebula(Game.WindowWidth, Game.WindowHeight, 8); // higher values give more smoothness
 
         public static View View { get { return gameWindow.GetView(); } set { gameWindow.SetView(value); } }
 

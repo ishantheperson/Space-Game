@@ -6,6 +6,9 @@ using System.Text;
 using SFML.Graphics;
 using SFML.Window;
 
+using SpaceGame;
+using SpaceGame.Extension;
+
 namespace SpaceGame.Procedural {
     public class Nebula : DrawableGameObject {
         private Sprite nebula;
@@ -17,7 +20,9 @@ namespace SpaceGame.Procedural {
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
         /// <param name="octave">Noise iterations</param>
-        public Nebula(int width, int height, int octave) {
+        /// <param name="start">Gradient start color</param>
+        /// <param name="end">Gradient end color</param>
+        public Nebula(int width, int height, int octave, Color start, Color end) {
             float[,] baseNoise = WhiteNoise(width, height);
             float[,] perlinNoise = PerlinNoise(baseNoise, octave);
 
@@ -30,10 +35,18 @@ namespace SpaceGame.Procedural {
                 }
             }
 
-            nebula = ApplyGradient(new Color(255, 100, 0, 255), Color.Red, perlinNoise);
+            nebula = ApplyGradient(start, end, perlinNoise);
             
             nebulaTexture = new Texture(nebula);
             this.nebula = new Sprite(nebulaTexture);
+        }
+
+        public override void Update(RenderWindow window) {
+            if (window.GetViewport(window.GetView()).Intersects(nebula.GetGlobalBounds().ToIntRect())) {
+                nebula.Position = new Vector2f(-(nebula.GetGlobalBounds().Width), 0);
+                Console.WriteLine("nebula offscreen");
+            }
+            nebula.Position = new Vector2f(nebula.Position.X + 0.5f, nebula.Position.Y);
         }
 
         public override void Draw(ref RenderWindow window) {

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using SFML.Graphics;
 using SFML.Window;
 
+using SpaceGame;
+using SpaceGame.Extension;
+
 namespace SpaceGame {
     public class Player : DrawableGameObject {
         #region Graphics
@@ -81,7 +84,7 @@ namespace SpaceGame {
             return (float)((180 / Math.PI) * Math.Atan2(b.Y - a.Y, b.X - a.X));
         }
 
-        private bool Near(Vector2f a, Vector2i b, int precision) {
+        private bool Near(Vector2f a, Vector2f b, int precision) {
             if (!(a.X - precision < b.X && a.X + precision > b.X)) return false;
             if (!(a.Y - precision < b.Y && a.Y + precision > b.Y)) return false;
             return true;

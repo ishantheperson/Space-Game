@@ -48,7 +48,8 @@ namespace SpaceGame.Procedural {
 
         public override void Draw(ref RenderWindow window) {
             window.Draw(nebula);
-        }
+        }
+
 
         private float Interpolate(float x, float y, float a) {
             //return x * (1 - a) + (a * y);

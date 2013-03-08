@@ -42,8 +42,6 @@ namespace SpaceGame {
             if (Mouse.IsButtonPressed(Mouse.Button.Left) && Game.Focused) {
                 moveLocation = Mouse.GetPosition(window);
                 move = true;
-
-                Console.WriteLine(weapon);
             }
 
             if (move) {
@@ -51,7 +49,7 @@ namespace SpaceGame {
                     move = false;
                 }
                 else {
-                    Vector2f direction = Normalize(new Vector2f((moveLocation.X - sprite.Position.X), (moveLocation.Y - sprite.Position.Y)));
+                    Vector2f direction = new Vector2f((moveLocation.X - sprite.Position.X), (moveLocation.Y - sprite.Position.Y)).Normalize();
                     rotation = degreeConversion * (float)Math.Atan2(direction.Y, direction.X);
 
                     if (Math.Abs(rotation) > 180) { // should not go more than 180
@@ -68,7 +66,7 @@ namespace SpaceGame {
                         sprite.Rotation -= 3;
                     }
 
-                    Vector2f forward = Normalize(new Vector2f((float)Math.Cos(sprite.Rotation * radianConversian), (float)Math.Sin(sprite.Rotation * radianConversian)));
+                    Vector2f forward = new Vector2f((float)Math.Cos(sprite.Rotation * radianConversian), (float)Math.Sin(sprite.Rotation * radianConversian)).Normalize();
 
                     forward *= 2;
                     sprite.Position += forward;
@@ -80,6 +78,7 @@ namespace SpaceGame {
             window.Draw(sprite);
         }
 
+        #region Math Helper Functions
         private float AngleBetweenVectors(Vector2f a, Vector2i b) {
             return (float)((180 / Math.PI) * Math.Atan2(b.Y - a.Y, b.X - a.X));
         }
@@ -89,10 +88,6 @@ namespace SpaceGame {
             if (!(a.Y - precision < b.Y && a.Y + precision > b.Y)) return false;
             return true;
         }
-
-        public Vector2f Normalize(Vector2f vector) {
-            float distance = (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y); // x^2 + y^2 == length (pythagorean theorum)
-            return new Vector2f(vector.X / distance, vector.Y / distance);
-        }
+        #endregion
     }
 }

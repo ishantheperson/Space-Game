@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawableGameObject.cs" />
-    <Compile Include="Extension\Conversion.cs" />
+    <Compile Include="Extension\Extension.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Gibberish.cs" />
     <Compile Include="Menu.cs" />

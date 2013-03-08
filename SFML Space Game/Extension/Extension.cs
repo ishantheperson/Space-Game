@@ -19,4 +19,11 @@ namespace SpaceGame.Extension {
             return new Vector2f((float)source.X, (float)source.Y);
         }
     }
+
+    public static class MathHelper {
+        public static Vector2f Normalize(this Vector2f vector) {
+            float distance = (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y); // x^2 + y^2 == length (pythagorean theorum)
+            return new Vector2f(vector.X / distance, vector.Y / distance);
+        }
+    }
 }

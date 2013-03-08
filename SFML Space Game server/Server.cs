@@ -7,26 +7,18 @@ using System.Net.Sockets;
 
 namespace SpaceGame.Server {
     class Server {
-        UdpClient client;
         IPEndPoint address;
 
-        IPEndPoint sender;
+        Player[] players;
 
-        byte[] data = new byte[1024];
-
-        public Server(int port) {
-            address = new IPEndPoint(IPAddress.Any, port);
-            client = new UdpClient(address);
-
-            sender = new IPEndPoint(IPAddress.Any, 0);
-
-            data = client.Receive(ref sender);
-            Console.WriteLine("Message Received from: " + sender.ToString());
-            Console.WriteLine(Encoding.ASCII.GetString(data, 0, data.Length));
+        public Server(int port, int capacity) {
+            players = new Player[capacity];
         }
 
-        private void Listen() {
-            
+        public void Listen() {
+            for (int i = 0; i < players.Length; i++) {
+                players[i] = new Player(new IPEndPoint(IPAddress.Any, 0));
+            }
         }
     }
 }

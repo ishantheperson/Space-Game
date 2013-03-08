@@ -9,6 +9,7 @@ namespace SpaceGame {
     /// Level Object lsts
     /// </summary>
     public abstract class DrawableGameObject {
+        public virtual void Initialize() { }
         public virtual void Draw(ref RenderWindow window) { }
         public virtual void Update(RenderWindow window) { }
     }

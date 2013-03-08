@@ -8,6 +8,7 @@ using SFML.Window;
 
 using SpaceGame;
 using SpaceGame.Extension;
+using System.Threading;
 
 namespace SpaceGame.Procedural {
     public class Nebula : DrawableGameObject {
@@ -24,6 +25,7 @@ namespace SpaceGame.Procedural {
         /// <param name="end">Gradient end color</param>
         public Nebula(int width, int height, int octave, Color start, Color end) {
             float[,] baseNoise = WhiteNoise(width, height);
+            
             float[,] perlinNoise = PerlinNoise(baseNoise, octave);
 
             Image nebula = new Image((uint) width, (uint) height);
@@ -42,11 +44,6 @@ namespace SpaceGame.Procedural {
         }
 
         public override void Update(RenderWindow window) {
-            if (window.GetViewport(window.GetView()).Intersects(nebula.GetGlobalBounds().ToIntRect())) {
-                nebula.Position = new Vector2f(-(nebula.GetGlobalBounds().Width), 0);
-                Console.WriteLine("nebula offscreen");
-            }
-            nebula.Position = new Vector2f(nebula.Position.X + 0.5f, nebula.Position.Y);
         }
 
         public override void Draw(ref RenderWindow window) {
@@ -54,7 +51,10 @@ namespace SpaceGame.Procedural {
         }
 
         private float Interpolate(float x, float y, float a) {
-            return x * (1 - a) + (a * y);
+            //return x * (1 - a) + (a * y);
+            double f = (1 - Math.Cos(a * Math.PI)) * 0.5d;
+
+            return (float) (x * (1 - f) + y * f);
         }
 
         private Color ApplyGradientColor(Color start, Color end, float t) {

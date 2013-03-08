@@ -15,6 +15,8 @@ namespace SpaceGame.Extension {
             return new FloatRect((float)source.Left, (float)source.Top, (float)source.Width, (float)source.Height);
         }
 
-        public static Vector2
+        public static Vector2f ToVector2f(this Vector2i source) {
+            return new Vector2f((float)source.X, (float)source.Y);
+        }
     }
 }

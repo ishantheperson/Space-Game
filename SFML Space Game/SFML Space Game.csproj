@@ -57,6 +57,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -92,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawableGameObject.cs" />
-    <Compile Include="Extension\Rectangles.cs" />
+    <Compile Include="Extension\Conversion.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Gibberish.cs" />
     <Compile Include="Menu.cs" />

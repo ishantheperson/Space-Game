@@ -8,6 +8,7 @@ namespace SpaceGame.Server {
     class Program {
         static void Main(string[] args) {
             Console.WriteLine("INFO: Starting server...");
+            Server server = new Server(9186);
         }
     }
 }

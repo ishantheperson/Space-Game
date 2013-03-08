@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Net;
+using System.Net.Sockets;
 
 using SFML.Graphics;
 using SFML.Window;
@@ -24,9 +27,14 @@ namespace SpaceGame {
         private const float degreeConversion = (float)(180 / Math.PI);
         #endregion
 
+        #region Networking
+        UdpClient client;
+        #endregion
+
         WeaponsProvider.Weapon weapon = WeaponsProvider.GetWeapon("Missile");
 
         public Player() {
+            #region Graphics
             texture = new Texture(@"res\image\BattleCruiserNoEngines.png");
             sprite = new Sprite(texture);
 
@@ -35,10 +43,31 @@ namespace SpaceGame {
             sprite.Position = new Vector2f(200, Game.WindowHeight / 2);
             sprite.Scale = new Vector2f(0.3f, 0.3f);
 
-            sprite.Texture.Smooth = true;  
+            sprite.Texture.Smooth = true;
+            #endregion
+
+            #region Networking
+            client = new UdpClient(11000);
+            try {
+                client.Connect("localhost", 9186);
+
+                byte[] data = Encoding.ASCII.GetBytes("Player created");
+                client.Send(data, data.Length);
+                client.Close();
+            }
+            catch (Exception e) {
+                Console.WriteLine("ERROR: Networking exception in Player!\n" + e.ToString());
+            }
+
+            #endregion
         }
 
         public override void Update(RenderWindow window) {
+            #region Networking
+
+            #endregion
+
+            #region Movement
             if (Mouse.IsButtonPressed(Mouse.Button.Left) && Game.Focused) {
                 moveLocation = Mouse.GetPosition(window);
                 move = true;
@@ -72,6 +101,7 @@ namespace SpaceGame {
                     sprite.Position += forward;
                 }
             }
+            #endregion
         }
         
         public override void Draw(ref RenderWindow window) {

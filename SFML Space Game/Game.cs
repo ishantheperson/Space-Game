@@ -19,7 +19,16 @@ namespace SpaceGame {
         }
 
         private static GameStates gameState = GameStates.Menu; // change to Game to test game
-        public static GameStates GameState { get { return gameState; } set { gameState = value; } }
+        private static GameStates previousGameState = GameStates.Menu;
+        public static GameStates GameState {
+            get {
+                return gameState;
+            }
+            set {
+                previousGameState = gameState;
+                gameState = value;
+            }
+        }
         #endregion
 
         #region Window
@@ -58,7 +67,7 @@ namespace SpaceGame {
 
             Focused = true;
             gameWindow.GainedFocus += (sender, args) => Focused = true;
-            gameWindow.LostFocus += (sender, args) => { Focused = false; gameState = GameStates.Pause; };
+            gameWindow.LostFocus += (sender, args) => { Focused = false; GameState = GameStates.Pause; }; // you MUST use the property for pausing to work
 
             sector = new Sector("test.xml");
             Ship ship = new Ship("test.xml");
@@ -87,8 +96,11 @@ namespace SpaceGame {
                         break;
 
                     case GameStates.Pause:
+                        if (Focused) { // done w/ pause
+                            gameState = previousGameState;
+                        }
+                        break;
 
-                        
                     case GameStates.Exit:
                         gameWindow.Display(); return;
                 }

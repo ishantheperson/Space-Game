@@ -8,11 +8,21 @@ using System.Net.Sockets;
 namespace SpaceGame.Server {
     class Server {
         UdpClient client;
-        List<IPEndPoint> connections;
+        IPEndPoint address;
+
+        IPEndPoint sender;
+
         byte[] data = new byte[1024];
 
         public Server(int port) {
-            connections.Add(new IPEndPoint(IPAddress.Any, port));
+            address = new IPEndPoint(IPAddress.Any, port);
+            client = new UdpClient(address);
+
+            sender = new IPEndPoint(IPAddress.Any, 0);
+
+            data = client.Receive(ref sender);
+            Console.WriteLine("Message Received from: " + sender.ToString());
+            Console.WriteLine(Encoding.ASCII.GetString(data, 0, data.Length));
         }
 
         private void Listen() {

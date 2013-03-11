@@ -6,11 +6,13 @@ using SFML.Window;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
+using SpaceGame.Extension;
+
 namespace SpaceGame {
     public class Menu : DrawableGameObject {
         public delegate void MenuButtonClickedHandler(object sender, EventArgs args);
         private static Font font = new Font("res/font.ttf");
-
+        
         #region Menu Button Class
         public class MenuButton {
             private Text text;
@@ -33,6 +35,7 @@ namespace SpaceGame {
 
                 shape.FillColor = new Color(255, 255, 255, 100);
                 #endregion
+
                 this.text.Origin = new Vector2f(this.text.GetLocalBounds().Width / 2, this.text.GetLocalBounds().Height / 2);
                 this.text.Position = new Vector2f(shape.Position.X + shape.Size.X / 2, shape.Position.Y + shape.Size.Y / 2);
 
@@ -40,16 +43,8 @@ namespace SpaceGame {
             }
 
             public void Update(RenderWindow window) {
-                float x1, y1, x2, y2;
-
-                x1 = shape.Position.X; // rect.Left; 
-                y1 = shape.Position.Y + shape.Size.Y; // rect.Top + rect.Height;
-
-                x2 = shape.Position.X + shape.Size.X; // rect.Left + rect.Width;
-                y2 = shape.Position.Y; // rect.Top;
-
                 Vector2i point = Mouse.GetPosition(window);
-                if ((x1 <= point.X) && (point.X <= x2) && (y1 >= point.Y) && (point.Y >= y2)) {
+                if (shape.Contains(point.ToVector2f())) {
                     if (Mouse.IsButtonPressed(Mouse.Button.Left)) {
                         beingClicked = true;
                         shape.FillColor = new Color(255, 255, 255, 200);

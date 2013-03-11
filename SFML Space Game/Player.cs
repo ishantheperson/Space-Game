@@ -51,9 +51,11 @@ namespace SpaceGame {
             try {
                 client.Connect("localhost", 9186);
 
+                Console.WriteLine("Sending data...");
+                
+
                 byte[] data = Encoding.ASCII.GetBytes("Player created");
                 client.Send(data, data.Length);
-                client.Close();
             }
             catch (Exception e) {
                 Console.WriteLine("ERROR: Networking exception in Player!\n" + e.ToString());

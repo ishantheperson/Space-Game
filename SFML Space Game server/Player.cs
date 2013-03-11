@@ -25,6 +25,7 @@ namespace SpaceGame.Server {
             server = new UdpClient(ip);
             connection = new IPEndPoint(IPAddress.Any, 0);
             listenThread = new Thread(Listen, 0);
+            listenThread.Start();
         }
 
         private void Listen() {

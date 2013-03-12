@@ -9,6 +9,7 @@ using SFML.Window;
 
 using SpaceGame;
 using SpaceGame.Extension;
+using System.Threading;
 
 namespace SpaceGame {
     public class Player : DrawableGameObject {
@@ -47,21 +48,30 @@ namespace SpaceGame {
             #endregion
 
             #region Networking
+            new Thread(new ThreadStart(Connect), 0).Start();
+            #endregion
+        }
+
+        private void Connect() {
             client = new UdpClient(11000);
             try {
-                client.Connect("localhost", 9186);
+                IPEndPoint ip = new IPEndPoint(IPAddress.Parse("50.156.12.144"), 9186);
+                client.Connect(ip); // localhost = ip
 
                 Console.WriteLine("Sending data...");
-                
 
                 byte[] data = Encoding.ASCII.GetBytes("Player created");
                 client.Send(data, data.Length);
+                Console.WriteLine("INFO: Data sent");
+
+                Console.WriteLine("Receinving data...");
+                data = client.Receive(ref ip);
+                Console.WriteLine("INFO: Data = {0}", ASCIIEncoding.ASCII.GetString(data));
             }
             catch (Exception e) {
                 Console.WriteLine("ERROR: Networking exception in Player!\n" + e.ToString());
             }
 
-            #endregion
         }
 
         public override void Update(RenderWindow window) {

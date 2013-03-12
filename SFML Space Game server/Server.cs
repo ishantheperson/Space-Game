@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace SpaceGame.Server {
     class Server {
@@ -26,6 +27,7 @@ namespace SpaceGame.Server {
                     // process server commands w/ message
 
                     // send message
+                    Thread.Sleep(5000);
                     data = Encoding.ASCII.GetBytes(welcome);
                     client.Send(data, data.Length, connection);
                     connection = null; // recycle objects

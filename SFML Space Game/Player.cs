@@ -29,10 +29,10 @@ namespace SpaceGame {
         #endregion
 
         #region Networking
-        UdpClient client;
+        Socket client;
         #endregion
 
-        WeaponsProvider.Weapon weapon = WeaponsProvider.GetWeapon("Missile");
+        WeaponsProvider.Weapon weapon = WeaponsProvider["Missile"];
 
         public Player() {
             #region Graphics
@@ -53,7 +53,7 @@ namespace SpaceGame {
         }
 
         private void Connect() {
-            client = new UdpClient(11000);
+            client = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             try {
                 IPEndPoint ip = new IPEndPoint(IPAddress.Parse("50.156.12.144"), 9186);
                 client.Connect(ip); // localhost = ip
@@ -61,17 +61,17 @@ namespace SpaceGame {
                 Console.WriteLine("Sending data...");
 
                 byte[] data = Encoding.ASCII.GetBytes("Player created");
-                client.Send(data, data.Length);
+                int dataSent = client.Send(data);
+
                 Console.WriteLine("INFO: Data sent");
 
-                Console.WriteLine("Receinving data...");
-                data = client.Receive(ref ip);
-                Console.WriteLine("INFO: Data = {0}", ASCIIEncoding.ASCII.GetString(data));
+                Console.WriteLine("INFO Receinving data...");
+                dataSent = client.Receive(data);
+                Console.WriteLine("INFO: Data = {0}", Encoding.ASCII.GetString(data));
             }
             catch (Exception e) {
                 Console.WriteLine("ERROR: Networking exception in Player!\n" + e.ToString());
             }
-
         }
 
         public override void Update(RenderWindow window) {

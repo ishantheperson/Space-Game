@@ -39,21 +39,22 @@ namespace SpaceGame {
         public const string WindowTitle = "The Amazing C# Space Game";
         #endregion
 
+        #region Menu
         private static Menu menu = new Menu(
             new Menu.MenuButtonInitializer("Play", (sender, args) => Game.gameState = GameStates.Game),
             new Menu.MenuButtonInitializer("Exit", (sender, args) => Game.gameState = GameStates.Exit)
             );
+        #endregion
 
         public static bool Focused { get; set; }
 
+        #region Graphics
         private static Sector sector;
         private static Nebula nebula = new Nebula(Game.WindowWidth, Game.WindowHeight, 11, Color.Black, Color.Red); // higher values give more smoothness
 
         public static View View { get { return gameWindow.GetView(); } set { gameWindow.SetView(value); } }
-
-        #region Pause
-
         #endregion
+        
         public static void Start() {
             Console.WriteLine("INFO: Game starting...");
 

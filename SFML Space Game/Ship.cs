@@ -3,7 +3,7 @@ using System.Xml;
 using System.Collections.Generic;
 
 namespace SpaceGame {
-    public class Ship : DrawableGameObject {
+    public class Ship : IDrawable {
         private string name = "default";
         private int maxHealth = 100;
         private int velocity;

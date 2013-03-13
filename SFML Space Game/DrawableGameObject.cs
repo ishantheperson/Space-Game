@@ -8,7 +8,7 @@ namespace SpaceGame {
     /// created. Implements Draw/Update method for use in 
     /// Level Object lsts
     /// </summary>
-    public abstract class DrawableGameObject {
+    public interface IDrawable {
         public virtual void Draw(ref RenderWindow window) { }
         public virtual void Update(RenderWindow window) { }
     }

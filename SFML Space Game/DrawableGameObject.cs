@@ -9,7 +9,7 @@ namespace SpaceGame {
     /// Level Object lsts
     /// </summary>
     public interface IDrawable {
-        public virtual void Draw(ref RenderWindow window) { }
-        public virtual void Update(RenderWindow window) { }
+        void Draw(ref RenderWindow window);
+        void Update();
     }
 }

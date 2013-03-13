@@ -12,7 +12,7 @@ using SpaceGame.Extension;
 using System.Threading;
 
 namespace SpaceGame {
-    public class Player : DrawableGameObject {
+    public class Player : IDrawable {
         #region Graphics
         private Texture texture;
         public Sprite sprite;
@@ -32,7 +32,13 @@ namespace SpaceGame {
         Socket client;
         #endregion
 
+<<<<<<< HEAD
         //WeaponsProvider.Weapon weapon = WeaponsProvider["Missile"];
+||||||| merged common ancestors
+        WeaponsProvider.Weapon weapon = WeaponsProvider["Missile"];
+=======
+        WeaponsProvider.Weapon weapon = WeaponsProvider.GetWeapon("Missile");   
+>>>>>>> f960a436d30c1f504f48d8428a7269ac5034e2aa
 
         public Player() {
             #region Graphics

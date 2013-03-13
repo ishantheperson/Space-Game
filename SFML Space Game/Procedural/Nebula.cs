@@ -11,7 +11,7 @@ using SpaceGame.Extension;
 using System.Threading;
 
 namespace SpaceGame.Procedural {
-    public class Nebula : DrawableGameObject {
+    public class Nebula : IDrawable {
         private Sprite nebula;
         private Texture nebulaTexture;
 

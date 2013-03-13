@@ -12,7 +12,7 @@ namespace SpaceGame {
         private Vector2f offset = new Vector2f();
         private Vector2i size = new Vector2i();
 
-        private Dictionary<string, DrawableGameObject> objects = new Dictionary<string, DrawableGameObject>();
+        private Dictionary<string, IDrawable> objects = new Dictionary<string, IDrawable>();
 
         /// <summary>
         /// Creates a new sector, and adds a player
@@ -142,7 +142,7 @@ namespace SpaceGame {
 
             }
 
-            foreach (KeyValuePair<string, DrawableGameObject> drawable in objects) {
+            foreach (KeyValuePair<string, IDrawable> drawable in objects) {
                 drawable.Value.Update(window);
             }
         }
@@ -152,7 +152,7 @@ namespace SpaceGame {
         /// </summary>
         /// <param name="window">Window to draw to</param>
         public void Draw(ref RenderWindow window) {
-            foreach (KeyValuePair<string, DrawableGameObject> drawable in objects) {
+            foreach (KeyValuePair<string, IDrawable> drawable in objects) {
                 drawable.Value.Draw(ref window);
             }
         }

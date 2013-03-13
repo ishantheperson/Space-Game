@@ -15,6 +15,7 @@ namespace SpaceGame.Procedural {
         private Sprite nebula;
         private Texture nebulaTexture;
 
+
         /// <summary>
         /// Creates a new Nebula
         /// </summary>

@@ -9,7 +9,7 @@ using SFML.Window;
 using SpaceGame.Extension;
 namespace SpaceGame.Procedural
 {
-    class Enemy : DrawableGameObject
+    class Enemy : IDrawable
     {
         private Sprite sprite;
         private Texture texture;

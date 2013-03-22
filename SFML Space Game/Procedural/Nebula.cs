@@ -44,10 +44,10 @@ namespace SpaceGame.Procedural {
             this.nebula = new Sprite(nebulaTexture);
         }
 
-        public override void Update(RenderWindow window) {
+        public void Update(RenderWindow window) {
         }
 
-        public override void Draw(ref RenderWindow window) {
+        public void Draw(ref RenderWindow window) {
             window.Draw(nebula);
         }
 

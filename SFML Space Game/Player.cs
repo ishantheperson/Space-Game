@@ -32,13 +32,7 @@ namespace SpaceGame {
         Socket client;
         #endregion
 
-<<<<<<< HEAD
-        //WeaponsProvider.Weapon weapon = WeaponsProvider["Missile"];
-||||||| merged common ancestors
-        WeaponsProvider.Weapon weapon = WeaponsProvider["Missile"];
-=======
         WeaponsProvider.Weapon weapon = WeaponsProvider.GetWeapon("Missile");   
->>>>>>> f960a436d30c1f504f48d8428a7269ac5034e2aa
 
         public Player() {
             #region Graphics
@@ -80,7 +74,7 @@ namespace SpaceGame {
             }
         }
 
-        public override void Update(RenderWindow window) {
+        public void Update(RenderWindow window) {
             #region Networking
 
             #endregion
@@ -122,7 +116,7 @@ namespace SpaceGame {
             #endregion
         }
         
-        public override void Draw(ref RenderWindow window) {
+        public void Draw(ref RenderWindow window) {
             window.Draw(sprite);
         }
 

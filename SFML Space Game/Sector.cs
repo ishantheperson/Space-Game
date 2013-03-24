@@ -13,6 +13,7 @@ namespace SpaceGame {
         private Vector2i size = new Vector2i();
 
         private Dictionary<string, DrawableGameObject> objects = new Dictionary<string, DrawableGameObject>();
+        
 
         /// <summary>
         /// Creates a new sector, and adds a player
@@ -115,9 +116,6 @@ namespace SpaceGame {
             left = new FloatRect(0, 0, 200, Game.WindowHeight);
             bottom = new FloatRect(0, Game.WindowHeight - 200, Game.WindowWidth, 200);
             #endregion
-
-            objects.Add("player", new Player());
-
         }
 
         /// <summary>
@@ -125,25 +123,8 @@ namespace SpaceGame {
         /// </summary>
         /// <param name="window">Window to pass</param>
         public void Update(RenderWindow window) {
-            if (((Player)objects["player"]).Bounds.Intersects(top) && offset.Y > 0) {
-                // move up
-            }
-
-            if (((Player)objects["player"]).Bounds.Intersects(left) && offset.X > 0) {
-                // move left
-            }
-
-            if (((Player)objects["player"]).Bounds.Intersects(right) && offset.X - (Game.View.Center.X - 300) < size.X) {
-                Console.WriteLine("right hit");
-            }
-
-            if (((Player)objects["player"]).sprite.GetGlobalBounds().Intersects(bottom) && offset.Y < size.Y) {
-                Game.View.Move(new Vector2f(0, 4));
-
-            }
-
             foreach (KeyValuePair<string, DrawableGameObject> drawable in objects) {
-                drawable.Value.Update(window);
+                drawable.Value.Update();
             }
         }
 

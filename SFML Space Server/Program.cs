@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
+using System.Net.Sockets;
+using System.Net;
 
-namespace SpaceGame.Server {
+namespace SpaceServer {
     class Program {
         static void Main(string[] args) {
-            Console.WriteLine("INFO: Starting server...");
-            Server.Start();
+            new Server().Listen();
         }
     }
 }

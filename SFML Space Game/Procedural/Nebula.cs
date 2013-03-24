@@ -12,9 +12,7 @@ using System.Threading;
 
 namespace SpaceGame.Procedural {
     public class Nebula : DrawableGameObject {
-        private Sprite nebula;
         private Texture nebulaTexture;
-
 
         /// <summary>
         /// Creates a new Nebula
@@ -41,14 +39,11 @@ namespace SpaceGame.Procedural {
             nebula = ApplyGradient(start, end, perlinNoise);
             
             nebulaTexture = new Texture(nebula);
-            this.nebula = new Sprite(nebulaTexture);
-        }
-
-        public override void Update(RenderWindow window) {
+            this.sprite = new Sprite(nebulaTexture);
         }
 
         public override void Draw(ref RenderWindow window) {
-            window.Draw(nebula);
+            window.Draw(sprite);
         }
 
 

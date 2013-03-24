@@ -32,7 +32,7 @@ namespace SpaceGame {
         Socket client;
         #endregion
 
-        //WeaponsProvider.Weapon weapon = WeaponsProvider["Missile"];
+        WeaponsProvider.Weapon weapon = WeaponsProvider.GetWeapon("Missile");   
 
         public Player() {
             #region Graphics
@@ -74,7 +74,7 @@ namespace SpaceGame {
             }
         }
 
-        public override void Update(RenderWindow window) {
+        public void Update(RenderWindow window) {
             #region Networking
 
             #endregion

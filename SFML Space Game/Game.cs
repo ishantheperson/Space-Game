@@ -89,7 +89,7 @@ namespace SpaceGame {
                         break;
 
                     case GameStates.Game:
-                        nebula.Update(gameWindow);
+                        nebula.Update();
                         nebula.Draw(ref gameWindow);
 
                         sector.Update(gameWindow);

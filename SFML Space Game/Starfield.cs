@@ -35,7 +35,6 @@ namespace SpaceGame {
             }
         }
 
-
         public override void Draw(ref RenderWindow window) {
             foreach (Tuple<int, int, int> tuple in stars) {
                 Sprite sprite = new Sprite();

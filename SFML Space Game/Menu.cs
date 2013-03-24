@@ -94,7 +94,7 @@ namespace SpaceGame {
             }
         }
 
-        public override void Update(RenderWindow window) {
+        public void Update(RenderWindow window) {
             foreach (MenuButton button in buttons) {
                 button.Update(window);
             }

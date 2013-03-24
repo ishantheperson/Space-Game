@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using SpaceGame.Extension;
 
 namespace SpaceGame {
-    public class Menu : DrawableGameObject {
+    public class Menu : IDrawable {
         public delegate void MenuButtonClickedHandler(object sender, EventArgs args);
         private static Font font = new Font("res/font.ttf");
         

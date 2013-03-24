@@ -12,7 +12,7 @@ using SpaceGame.Extension;
 using System.Threading;
 
 namespace SpaceGame {
-    public class Player : DrawableGameObject {
+    public class Player : IDrawable {
         #region Graphics
         private Texture texture;
         public Sprite sprite;
@@ -116,7 +116,7 @@ namespace SpaceGame {
             #endregion
         }
         
-        public override void Draw(ref RenderWindow window) {
+        public void Draw(ref RenderWindow window) {
             window.Draw(sprite);
         }
 

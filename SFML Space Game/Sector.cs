@@ -12,13 +12,8 @@ namespace SpaceGame {
         private Vector2f offset = new Vector2f();
         private Vector2i size = new Vector2i();
 
-<<<<<<< HEAD
         private Dictionary<string, DrawableGameObject> objects = new Dictionary<string, DrawableGameObject>();
         
-=======
-        private Dictionary<string, IDrawable> objects = new Dictionary<string, IDrawable>();
->>>>>>> 88c8ecce42c3fb30a88adf72d7b063683649f698
-
         /// <summary>
         /// Creates a new sector, and adds a player
         /// </summary>
@@ -127,30 +122,8 @@ namespace SpaceGame {
         /// </summary>
         /// <param name="window">Window to pass</param>
         public void Update(RenderWindow window) {
-<<<<<<< HEAD
             foreach (KeyValuePair<string, DrawableGameObject> drawable in objects) {
                 drawable.Value.Update();
-=======
-            if (((Player)objects["player"]).Bounds.Intersects(top) && offset.Y > 0) {
-                // move up
-            }
-
-            if (((Player)objects["player"]).Bounds.Intersects(left) && offset.X > 0) {
-                // move left
-            }
-
-            if (((Player)objects["player"]).Bounds.Intersects(right) && offset.X - (Game.View.Center.X - 300) < size.X) {
-                Console.WriteLine("right hit");
-            }
-
-            if (((Player)objects["player"]).sprite.GetGlobalBounds().Intersects(bottom) && offset.Y < size.Y) {
-                Game.View.Move(new Vector2f(0, 4));
-
-            }
-
-            foreach (KeyValuePair<string, IDrawable> drawable in objects) {
-                drawable.Value.Update(window);
->>>>>>> 88c8ecce42c3fb30a88adf72d7b063683649f698
             }
         }
 
@@ -159,7 +132,7 @@ namespace SpaceGame {
         /// </summary>
         /// <param name="window">Window to draw to</param>
         public void Draw(ref RenderWindow window) {
-            foreach (KeyValuePair<string, IDrawable> drawable in objects) {
+            foreach (KeyValuePair<string, DrawableGameObject> drawable in objects) {
                 drawable.Value.Draw(ref window);
             }
         }

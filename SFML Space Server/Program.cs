@@ -9,7 +9,7 @@ using System.Net;
 namespace SpaceServer {
     class Program {
         static void Main(string[] args) {
-            new Server().Listen();
+            // new Server().Listen();
         }
     }
 }

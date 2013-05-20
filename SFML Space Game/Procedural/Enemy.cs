@@ -1,4 +1,4 @@
-﻿using System;
+﻿/* using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,15 +7,8 @@ using SFML.Graphics;
 using SFML.Window;
 
 using SpaceGame.Extension;
-<<<<<<< HEAD
 namespace SpaceGame.Procedural {
     class Enemy : DrawableGameObject {
-=======
-namespace SpaceGame.Procedural
-{
-    class Enemy : IDrawable
-    {
->>>>>>> 88c8ecce42c3fb30a88adf72d7b063683649f698
         private Sprite sprite;
         private Texture texture;
         private float rotation;
@@ -66,3 +59,4 @@ namespace SpaceGame.Procedural
     }
 }
 
+*/

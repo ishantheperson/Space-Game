@@ -12,10 +12,9 @@ using SpaceGame.Extension;
 using System.Threading;
 
 namespace SpaceGame {
-    public class Player : IDrawable {
+    public class Player : DrawableGameObject {
         #region Graphics
         private Texture texture;
-        public Sprite sprite;
 
         private Vector2i moveLocation;
         private bool move;
@@ -115,10 +114,7 @@ namespace SpaceGame {
             }
             #endregion
         }
-        
-        public void Draw(ref RenderWindow window) {
-            window.Draw(sprite);
-        }
+
 
         #region Math Helper Functions
         private float AngleBetweenVectors(Vector2f a, Vector2i b) {

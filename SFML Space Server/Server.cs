@@ -5,28 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using System.Xml;
 
 namespace SpaceServer {
     class Server {
-        struct Player {
-            int x, y;
-            string name;
+        private XmlDocument settings = new XmlDocument();
+        private UdpClient server;
+        private IPEndPoint endPoint;
+
+        public Server(string settingPath) {
+            settings.Load(settingPath);
+            server = new UdpClient(new IPEndPoint(IPAddress.Any, int.Parse(settings["port"].Value)));
+
+            Start();
         }
 
-        List<Player> players = new List<Player>();
+        private void Start() {
+            Player player = new Player();
 
-        const int port = 9000;
-
-        UdpClient server = new UdpClient(port);
-        IPEndPoint address = new IPEndPoint(IPAddress.Any, 0);
-
-        public void Listen() {
-            while (true) {
-                byte[] data = server.Receive(ref address);
-                string command = ASCIIEncoding.ASCII.GetString(data);
-
-                Console.WriteLine("Message received: " + command);
-            }
+            server.BeginReceive(new AsyncCallback(Receive), player);
         }
+
+        private void Receive(IAsyncResult result) {
+            Player player = (Player)(result.AsyncState);
+        }
+    }
+
+    struct Player {
+        public string message;
     }
 }

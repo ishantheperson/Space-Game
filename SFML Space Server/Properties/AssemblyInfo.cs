@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SFML Space Server")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("SFML Space Server")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("SFML Space Server")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2013")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Gabe Newell Fanclub")]
+[assembly: AssemblyProduct("SFML Space Game Product")]
+[assembly: AssemblyCopyright("Gabe Newells Wish")]
+[assembly: AssemblyTrademark("Gaben")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2541201c-87bb-4d5a-ba6f-4e6c865673c7")]
+[assembly: Guid("9709331e-069d-4afb-9e32-f1dcfc95766f")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -29,8 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.1.1")]
+[assembly: AssemblyFileVersion("1.1.1.1")]
